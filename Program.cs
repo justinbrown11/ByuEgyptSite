@@ -43,6 +43,13 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = true;
+    options.Preload = true;
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -60,6 +67,7 @@ else
 }
 
 app.UseHttpsRedirection();
+app.UseHsts();
 
 app.Use(async (context, next) =>
 {
