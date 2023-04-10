@@ -1,6 +1,7 @@
 using ByuEgyptSite.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,26 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoleManager<RoleManager<IdentityRole>>();
+
+var roleManager = builder.Services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>();
+
+//var result = await roleManager.CreateAsync(new IdentityRole("Administrator"));
+//if (result.Succeeded)
+//{
+//    Console.WriteLine("Administrator role created");
+//}
+
+//else
+//{
+//    Console.WriteLine("Failed to create role 'Manager':");
+//    foreach (var error in result.Errors)
+//    {
+//        Console.WriteLine(error.Description);
+//    }
+//}
 
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
@@ -43,7 +63,14 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = true;
+    options.Preload = true;
+});
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
@@ -60,6 +87,7 @@ else
 }
 
 app.UseHttpsRedirection();
+app.UseHsts();
 
 app.Use(async (context, next) =>
 {
@@ -82,5 +110,15 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+//    var user = await userManager.FindByNameAsync("justinjoelbrown@gmail.com");
+//    if (user != null)
+//    {
+//        await userManager.AddToRoleAsync(user, "Administrator");
+//    }
+//}
 
 app.Run();
