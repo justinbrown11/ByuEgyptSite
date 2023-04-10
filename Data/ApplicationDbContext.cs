@@ -1,5 +1,5 @@
-﻿using ByuEgyptSite.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using ByuEgyptSite.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByuEgyptSite.Data
@@ -11,6 +11,6 @@ namespace ByuEgyptSite.Data
         {
         }
 
-        public DbSet<Burial> Burials { get; set;}
+        public DbSet<Burial> Burials { get; set; }
     }
 }
