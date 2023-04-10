@@ -1,4 +1,4 @@
-namespace IntexExample3.Models
+namespace ByuEgyptSite.Models
 {
     public class ErrorViewModel
     {

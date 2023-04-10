@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace IntexExample3.Data
+namespace ByuEgyptSite.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
