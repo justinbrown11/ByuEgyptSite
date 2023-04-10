@@ -1,5 +1,6 @@
 ﻿using ByuEgyptSite.Data;
 using Microsoft.AspNetCore.Mvc;
+using ByuEgyptSite.Models;
 
 namespace ByuEgyptSite.Controllers
 {
@@ -44,7 +45,7 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult Edit (int burialid)
         {
-            var burial = _burialContext.Burials.Single(x => x.burialId == burialid);
+            var burial = _burialContext.Burials.Single(x => x.id == burialid);
 
             return View("AddRecord", burial); // return the "Enter Movie" page view algon with the record for the single entry
         }
@@ -62,9 +63,9 @@ namespace ByuEgyptSite.Controllers
 
         // Function to delete table row (Get)
         [HttpGet]
-        public IActionResult DeleteRecord (int burialId) 
+        public IActionResult DeleteRecord (int burialid) 
         {
-            var record = _burialContext.Records.Single(x => x.BurialId == burialid);
+            var record = _burialContext.Burials.Single(x => x.id == burialid);
 
             return View(record);
         }
