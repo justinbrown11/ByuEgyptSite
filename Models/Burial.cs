@@ -1,12 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    [Table("burialmain")]
     public class Burial
     {
         [Key]
         [Required]
-        public int id { get; set; }
+        public long id { get; set; }
 
         public string? squarenorthsouth { get; set; }
 
@@ -30,7 +32,7 @@ namespace ByuEgyptSite.Models
         public string? westtohead { get; set; }
         public string? samplescollected { get; set; }
         public string? area { get; set; }
-        public int burialid { get; set; }
+        public long? burialid { get; set; }
         public string? length { get; set; }
         public string? burialnumber { get; set; }
         public string? dataexpertinitials { get; set; }
@@ -41,7 +43,7 @@ namespace ByuEgyptSite.Models
         public string? photos { get; set; }
         public string? hair { get; set; }
         public string? burialmaterials { get; set; }
-        public DateOnly dateofexcavation { get; set; }
+        public DateOnly? dateofexcavation { get; set; }
         public string? fieldbookexcavationyear { get; set; }
         public string? clusternumber { get; set; }
         public string? shaftnumber { get; set; }
