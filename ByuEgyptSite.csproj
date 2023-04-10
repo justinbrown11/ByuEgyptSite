@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-IntexExample3-9c0fd03d-72f8-49fe-9925-adb5331ff128</UserSecretsId>
+    <UserSecretsId>aspnet-ByuEgyptSite-9c0fd03d-72f8-49fe-9925-adb5331ff128</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

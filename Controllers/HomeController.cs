@@ -1,8 +1,8 @@
-﻿using IntexExample3.Models;
+﻿using ByuEgyptSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace IntexExample3.Controllers
+namespace ByuEgyptSite.Controllers
 {
     public class HomeController : Controller
     {
