@@ -1,9 +1,46 @@
 ﻿<!--Paginated list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
 select specific records for more details-->
 
+@model List<Burial>
+
 @{
     ViewData["Title"] = "BurialSummary";
 }
 
-<h1>BurialSummary</h1>
+<div></div>
+
+ @foreach (var b in Model)
+        {
+            <!--Each burial element-->
+            <div class="card card-outline-primary m-1 p-1">
+
+                <!--just id for now-->
+                <div class="bg-light p-1">
+                    <h4>@b.id</h4>
+                    <span class="badge bg-info" style="float:right">
+                        Test
+                    </span>
+                </div>
+
+                <!--Rest of info about book-->
+                <ul>
+                    <li>Other stuff 1</li>
+                    <li>Other stuff 2</li>
+                </ul>
+            </div>
+           }
+
+@*    <!--Form to add to cart-->
+    <form method="post" asp-page="/AddToCart">
+
+        <input type="hidden" asp-for="@Model.BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">Add to cart</button>
+        </span>
+
+    </form>*@
+
+</div>
 
