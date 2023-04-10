@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IntexExample3.Models
+namespace ByuEgyptSite.Models
 {
-    public class BurialModel
+    public class Burial
     {
         [Key]
         [Required]
