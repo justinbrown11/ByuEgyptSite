@@ -25,6 +25,12 @@ namespace ByuEgyptSite.Controllers
             return View();
         }
 
+        public IActionResult BurialRecord(long burialid)
+        {
+            var record = _context.Burials.Single(x => x.id == burialid);
+            return View(record);
+        }
+
         [HttpGet]
         public IActionResult BurialSummary(int? pageNumber)
         {
