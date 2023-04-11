@@ -74,6 +74,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// THIS IS NOT YET WORKING PROPERLY (won't login)
 // Create a scope to add proper roles and create an admin user
 using (var scope = app.Services.CreateScope())
 {
