@@ -32,20 +32,25 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 var roleManager = builder.Services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>();
 
-//var result = await roleManager.CreateAsync(new IdentityRole("Administrator"));
-//if (result.Succeeded)
-//{
-//    Console.WriteLine("Administrator role created");
-//}
+if (!await roleManager.RoleExistsAsync("administrator")) // If the "administrator" role does not currently exist, make a new role called "administrator"
+{
+    var role = new IdentityRole("administrator");
+    var result = await roleManager.CreateAsync(role);
+    
+    if (result.Succeeded) // If creation was successful, return confirmation, else return error message and descriptions
+    {
+        Console.WriteLine("Administrator role created");
+    }
 
-//else
-//{
-//    Console.WriteLine("Failed to create role 'Manager':");
-//    foreach (var error in result.Errors)
-//    {
-//        Console.WriteLine(error.Description);
-//    }
-//}
+    else
+    {
+        Console.WriteLine("Failed to create role 'Administrator':");
+        foreach (var error in result.Errors)
+        {
+            Console.WriteLine(error.Description);
+        }
+    }
+}
 
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
@@ -70,7 +75,6 @@ builder.Services.AddHsts(options =>
     options.Preload = true;
 });
 builder.Services.AddControllersWithViews();
-
 
 var app = builder.Build();
 
@@ -111,14 +115,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-//    var user = await userManager.FindByNameAsync("justinjoelbrown@gmail.com");
-//    if (user != null)
-//    {
-//        await userManager.AddToRoleAsync(user, "Administrator");
-//    }
-//}
+// Add a user as an administrator
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var user = await userManager.FindByNameAsync("porterthomas461@gmail.com");
+    if (user != null)
+    {
+        await userManager.AddToRoleAsync(user, "Administrator");
+    }
+}
 
 app.Run();
