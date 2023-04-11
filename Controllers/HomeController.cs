@@ -26,11 +26,14 @@ namespace ByuEgyptSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult BurialSummary()
+        public IActionResult BurialSummary(int? pageNumber)
         {
-            var x = _context.Burials.ToList();
+            int pageSize = 10;
 
-            return View(x);
+            var burials = PaginatedList<Burial>.Create(_context.Burials.ToList(),
+                pageNumber ?? 1, pageSize);
+
+            return View(burials);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
