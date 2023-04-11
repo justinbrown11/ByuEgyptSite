@@ -71,7 +71,6 @@ builder.Services.AddHsts(options =>
 });
 builder.Services.AddControllersWithViews();
 
-
 var app = builder.Build();
 
 // THIS IS NOT YET WORKING PROPERLY (won't login)
