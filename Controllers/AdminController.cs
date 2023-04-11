@@ -78,99 +78,110 @@ namespace ByuEgyptSite.Controllers
             return View(record);
         }
 
-        // THESE ARE THE USER ADMIN STUFF, YOU'LL NEED TO CHANGE THE ACt
+        // User Management
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var users = await userManager.Users.ToListAsync();
-        //    return View(users);
-        //}
+        public async Task<IActionResult> Index()
+        {
+            var users = await userManager.Users.ToListAsync();
+            return View(users);
+        }
 
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    var user = await userManager.FindByIdAsync(id);
-        //    var roles = roleManager.Roles.ToList();
+        public async Task<IActionResult> Edit(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
 
-        //    var model = new EditUserViewModel
-        //    {
-        //        Id = user.Id,
-        //        Email = user.Email,
-        //        UserName = user.UserName,
-        //        Roles = roles
-        //    };
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Roles = null
+            };
 
-        //    return View(model);
-        //}
+            if (user != null)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                if (roles.Any())
+                {
+                    model.Roles = roles.ToList();
+                }
+            }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(EditUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await userManager.FindByIdAsync(model.Id);
+            return View(model);
+        }
 
-        //        if (user != null)
-        //        {
-        //            user.Email = model.Email;
-        //            user.UserName = model.UserName;
+        // Edit user info and roles
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid) // Is user input valid?
+            {
+                var user = await userManager.FindByIdAsync(model.Id); // Retrieve user with specified ID
 
-        //            var result = await userManager.UpdateAsync(user);
+                if (user != null) // If user is found, set user Email and Username to input values
+                {
+                    user.Email = model.Email;
+                    user.UserName = model.UserName;
 
-        //            if (result.Succeeded)
-        //            {
-        //                var selectedRoles = model.SelectedRoles ?? new string[] { };
-        //                var roles = await userManager.GetRolesAsync(user);
+                    var result = await userManager.UpdateAsync(user); // Update user info
 
-        //                result = await userManager.AddToRolesAsync(user, selectedRoles.Except(roles));
+                    if (result.Succeeded) // If update was successful, set user roles to selected input values
+                    {
+                        var selectedRoles = model.SelectedRoles ?? new string[] { };
 
-        //                if (!result.Succeeded)
-        //                {
-        //                    ModelState.AddModelError("", "Failed to add selected roles to user.");
-        //                    return View(model);
-        //                }
+                        var roles = await userManager.GetRolesAsync(user); // Get current roles of user
 
-        //                result = await userManager.RemoveFromRolesAsync(user, roles.Except(selectedRoles));
+                        result = await userManager.AddToRolesAsync(user, selectedRoles.Except(roles)); // Add user input roles with exception of current roles
 
-        //                if (!result.Succeeded)
-        //                {
-        //                    ModelState.AddModelError("", "Failed to remove deselected roles from user.");
-        //                    return View(model);
-        //                }
+                        if (!result.Succeeded) // If update is not successful, return error message and page view
+                        {
+                            ModelState.AddModelError("", "Failed to add selected roles to user.");
+                            return View(model);
+                        }
 
-        //                return RedirectToAction("Index");
-        //            }
-        //        }
+                        result = await userManager.RemoveFromRolesAsync(user, roles.Except(selectedRoles)); // Keep only the selected roles from user input
 
-        //        ModelState.AddModelError("", "User not found.");
-        //    }
+                        if (!result.Succeeded) // If role edit is not successful, return error message and page view
+                        {
+                            ModelState.AddModelError("", "Failed to remove deselected roles from user.");
+                            return View(model);
+                        }
 
-        //    return View(model);
-        //}
+                        return RedirectToAction("Index"); // If all edits are successful, redirect to Index view of current controller
+                    }
+                }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    var user = await userManager.FindByIdAsync(id);
+                ModelState.AddModelError("", "User not found."); // If user is not found, return error message and page view
+            }
 
-        //    if (user != null)
-        //    {
-        //        var result = await userManager.DeleteAsync(user);
+            return View(model);
+        }
 
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Failed to delete user.");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("", "User not found.");
-        //    }
+        // Delete user
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await userManager.FindByIdAsync(id); // Retrieve user with specified ID
 
-        //    return View("Index", userManager.Users);
-        //}
+            if (user != null) // If user is found, delete user
+            {
+                var result = await userManager.DeleteAsync(user);
+
+                if (result.Succeeded) // if deletion was successful, redirect back to Index view, else return error message
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Failed to delete user.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not found."); // If user is not found, return error message
+            }
+
+            return View("Index", userManager.Users); // Return Index view for list of users
+        }
     }
 }
