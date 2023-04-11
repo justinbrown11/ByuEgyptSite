@@ -28,7 +28,7 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult BurialSummary(int? pageNumber)
         {
-            int pageSize = 10;
+            int pageSize = 5;
 
             var burials = PaginatedList<Burial>.Create(_context.Burials.ToList(),
                 pageNumber ?? 1, pageSize);
