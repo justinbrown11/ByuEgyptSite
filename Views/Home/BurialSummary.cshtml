@@ -1,46 +1,94 @@
 ﻿<!--Paginated list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
 select specific records for more details-->
 
-@model List<Burial>
+@model PaginatedList<Burial>
 
 @{
-    ViewData["Title"] = "BurialSummary";
+    ViewData["Title"] = "Burial Findings";
 }
 
-<div></div>
+<div class="container-fluid">
+    <div class="row m-1 p-1">
+        <div class="col-3">
+            <h3>Data Menu will go here</h3>
+        </div>
 
- @foreach (var b in Model)
-        {
-            <!--Each burial element-->
-            <div class="card card-outline-primary m-1 p-1">
+        <div class="col-9">
+            @foreach (var b in Model)
+            {
+                <div class="card card-outline-primary m-1 p-1">
 
-                <!--just id for now-->
-                <div class="bg-light p-1">
-                    <h4>@b.id</h4>
-                    <span class="badge bg-info" style="float:right">
-                        Test
-                    </span>
+                    <form method="delete">
+                        <input type="hidden" value="@b.id" />
+
+                        <div class="modal fade" id="confirm-delete-modal" tabindex="-1" aria-labelledby="confirm-delete-modal-title" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirm-delete-modal-title">Confirm Deletion</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to remove this item?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="bg-light p-1">
+                        <h4>Burial Location: @(b.squarenorthsouth + " " + b.northsouth + " " + b.squareeastwest + " " + b.eastwest + " " + b.area + " " + b.burialnumber)</h4>
+                        <span class="badge sex-color" style="float:right">
+                            @(b.sex == "M" ? "Male" : b.sex == "F" ? "Female" : "Unknown Sex")
+                        </span>
+                    </div>
+
+                    <ul>
+                        <li>Depth: @b.depth</li>
+                        <li>Length: @b.length</li>
+                        <li>Head Direction: @b.headdirection</li>
+                        <li>Preservation: @b.preservation</li>
+                        <li>Wrapping: @b.wrapping</li>
+                        <li>Age at Death: @b.ageatdeath</li>
+                        <li>Hair Color: @b.haircolor</li>
+                    </ul>
+
+                    <div>
+
+                        <span class="card-text">
+                            <button type="button" class="btn btn-danger btn-sm float-end m-1" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">Remove</button>
+                        </span>
+
+                        <form method="patch">
+                            <input type="hidden" value="@b.id" />
+
+                            <span class="card-text">
+                                <button type="submit" class="btn btn-info btn-sm float-end m-1">Edit</button>
+                            </span>
+                        </form>
+
+                        <form method="get">
+                            <input type="hidden" value="@b.id" />
+
+                            <span class="card-text">
+                                <button type="submit" class="btn btn-warning btn-sm float-end m-1">View Details</button>
+                            </span>
+                        </form>
+                    </div>
                 </div>
+            }
 
-                <!--Rest of info about book-->
-                <ul>
-                    <li>Other stuff 1</li>
-                    <li>Other stuff 2</li>
-                </ul>
-            </div>
-           }
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
 
-@*    <!--Form to add to cart-->
-    <form method="post" asp-page="/AddToCart">
-
-        <input type="hidden" asp-for="@Model.BookId" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-
-        <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-end">Add to cart</button>
-        </span>
-
-    </form>*@
-
+            <a asp-action="BurialSummary" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled"><img src="~/img/left-arrow.png" width="20" height="20" class="mr-1"/> Previous </a>
+            <a asp-action="BurialSummary" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next <img src="~/img/right-arrow.png" width="20" height="20" class="ml-1" /></a>
+        </div>
+    </div>
 </div>
-
