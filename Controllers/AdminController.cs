@@ -7,75 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByuEgyptSite.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private ApplicationDbContext _burialContext { get; set; }
 
-        // Constructor
-        public AdminController(ApplicationDbContext ac, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(UserManager<IdentityUser> userManager)
         {
-            _burialContext = ac;
             this.userManager = userManager;
-            this.roleManager = roleManager;
-        }
-
-        [HttpGet]
-
-        // Return the AddRecord view
-        public IActionResult AddRecord()
-        {
-            return View("Admin/Records/AddRecord");
-        }
-
-        [HttpPost]
-
-        // Given a valid record entry, add the entry to the database _recordContext
-        // and return the AddRecord Confirmation view along with the entry name
-        public IActionResult AddRecord(Burial bur)
-        {
-            if (ModelState.IsValid) // If entry is valid
-            {
-                _burialContext.Add(bur);
-                _burialContext.SaveChanges();
-
-                return View("AddRecordConfirmation", bur);
-            }
-            else // If entry is invalid
-            {
-                return View(bur);
-            }
-        }
-
-        // Function to edit table row (Get)
-        [HttpGet]
-        public IActionResult Edit (int burialid)
-        {
-            var burial = _burialContext.Burials.Single(x => x.id == burialid);
-
-            return View("AddRecord", burial); // return the "Enter Movie" page view algon with the record for the single entry
-        }
-
-        // Function to edit table row (Post)
-        [HttpPost]
-
-        public IActionResult Edit (Burial bur)
-        {
-            _burialContext.Update(bur);
-            _burialContext.SaveChanges();
-
-            return RedirectToAction("Home/BurialSummary");
-        }
-
-        // Function to delete table row (Get)
-        [HttpGet]
-        public IActionResult DeleteRecord (int burialid) 
-        {
-            var record = _burialContext.Burials.Single(x => x.id == burialid);
-
-            return View(record);
         }
 
         // User Management
@@ -83,7 +22,7 @@ namespace ByuEgyptSite.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await userManager.Users.ToListAsync();
-            return View(users);
+            return View("/Views/Admin/Users/Index.cshtml", users);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -147,7 +86,7 @@ namespace ByuEgyptSite.Controllers
                             return View(model);
                         }
 
-                        return RedirectToAction("Index"); // If all edits are successful, redirect to Index view of current controller
+                        return RedirectToAction("/Views/Admin/Users/Index.cshtml"); // If all edits are successful, redirect to Index view of current controller
                     }
                 }
 
@@ -169,7 +108,7 @@ namespace ByuEgyptSite.Controllers
 
                 if (result.Succeeded) // if deletion was successful, redirect back to Index view, else return error message
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("/Views/Admin/Users/Index.cshtml");
                 }
                 else
                 {
@@ -181,7 +120,7 @@ namespace ByuEgyptSite.Controllers
                 ModelState.AddModelError("", "User not found."); // If user is not found, return error message
             }
 
-            return View("Index", userManager.Users); // Return Index view for list of users
+            return View("/Views/Admin/Users/Index.cshtml", userManager.Users); // Return Index view for list of users
         }
     }
 }

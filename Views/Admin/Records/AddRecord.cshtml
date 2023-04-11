@@ -7,7 +7,8 @@
 
 <div class="container p-3 bg-light">
     <div class="d-flex justify-content-center">
-        @*<form method="post">
+@*        <form method="post">
+            
             <label asp-for="Title">Title:</label>
             <input asp-for="Title" /><br />
 
@@ -25,28 +26,7 @@
                 <option value="R">R</option>
             </select><br />
 
-            <label asp-for="Edited">Edited:</label>
-            <select asp-for="Edited">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select><br />
-
-            <label asp-for="Lent_to">Lent To:</label>
-            <input asp-for="Lent_to" /><br />
-
-            <label asp-for="Notes">Notes:</label>
-            <input asp-for="Notes" /><br />
-
-            <label asp-for="CategoryId">Category ID:</label>
-            <select asp-for="CategoryId">
-                <option value="">Select a Category</option>
-                @foreach (Category c in ViewBag.Categories)
-                {
-                    <option value="@c.CategoryId">@c.CategoryName</option>
-                }
-            </select><br />
-
-            <div class="d-flex justify-content-center"><button type="submit">Add Movie</button></div>
+            <div class="d-flex justify-content-center"><button type="submit">Save record</button></div>
 
             <div asp-validation-summary="All"></div>
         </form>*@
