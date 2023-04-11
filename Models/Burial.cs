@@ -43,9 +43,10 @@ namespace ByuEgyptSite.Models
         public string? photos { get; set; }
         public string? hair { get; set; }
         public string? burialmaterials { get; set; }
-        public DateOnly? dateofexcavation { get; set; }
+        public DateTime? dateofexcavation { get; set; }
         public string? fieldbookexcavationyear { get; set; }
         public string? clusternumber { get; set; }
         public string? shaftnumber { get; set; }
+        public ICollection<BurialTextile> burialTextiles { get; set; }
     }
 }
