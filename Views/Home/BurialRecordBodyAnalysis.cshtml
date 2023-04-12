@@ -1,0 +1,106 @@
+﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
+details captured about the mummy or items included in its burial.)-->
+@{
+    ViewData["Title"] = "Burial Record Body Analysis";
+}
+
+@model Burial
+
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Overview</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Textiles</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-warning">Body Analysis</button></a>
+    </li>
+</ul>
+
+</br>
+
+<div class="row">
+    <div class="col">
+        <h3 class="text-center">Body Analysis</h3>
+        <br />
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Date of Examination</th>
+                <th>Preservation Index</th>
+                <th>Hair Color</th>
+                <th>Observations</th>
+                <th>Robust</th>
+                <th>Supraorbitalridges</th>
+                <th>Orbitedge</th>
+                <th>Parietal Bossing</th>
+                <th>Gonion</th>
+                <th>Nuchal Crest</th>
+                <th>Zygomaticcrest</th>
+                <th>Sphenooccipitalsynchrondrosis</th>
+                <th>Lamboidsuture</th>
+                <th>Tooth Attrition</th>
+                <th>Tooth Eruption</th>
+                <th>Tooth Eruption Age Estimate</th>
+                <th>Ventralarc</th>
+                <th>Subpubicangle</th>
+                <th>Sciatic Notch</th>
+                <th>Pubic Bone</th>
+                <th>Preauricularsulcus</th>
+                <th>Medial IP Ramus</th>
+                <th>Dorsalpitting</th>
+                <th>Femur</th>
+                <th>Humerus</th>
+                <th>Femur Head Diameter</th>
+                <th>Humerus Head Diameter</th>
+                <th>Femur Length</th>
+                <th>Humerus Length</th>
+                <th>Estimate Stature</th>
+                <th>Osteophytosis</th>
+                <th>Caries Periodontal Disease</th>
+                <th>Notes</th>
+                </thead>
+                <tbody>
+                    @foreach (BodyAnalysis b in Model.bodyAnalyses)
+                    {
+                        <tr>
+                            <td>@b.dateofexamination</td>
+                            <td>@b.preservationindex</td>
+                            <td>@b.haircolor</td>
+                            <td>@b.observations</td>
+                            <td>@b.orbitedge</td>
+                            <td>@b.parietalbossing</td>
+                            <td>@b.gonion</td>
+                            <td>@b.nuchalcrest</td>
+                            <td>@b.zygomaticcrest</td>
+                            <td>@b.sphenooccipitalsynchrondrosis</td>
+                            <td>@b.lamboidsuture</td>
+                            <td>@b.toothattrition</td>
+                            <td>@b.tootheruption</td>
+                            <td>@b.tootheruptionageestimate</td>
+                            <td>@b.ventralarc</td>
+                            <td>@b.subpubicangle</td>
+                            <td>@b.sciaticnotch</td>
+                            <td>@b.pubicbone</td>
+                            <td>@b.preauricularsulcus</td>
+                            <td>@b.medial_ip_ramus</td>
+                            <td>@b.dorsalpitting</td>
+                            <td>@b.femur</td>
+                            <td>@b.humerus</td>
+                            <td>@b.femurheaddiameter</td>
+                            <td>@b.humerusheaddiameter</td>
+                            <td>@b.femurlength</td>
+                            <td>@b.humeruslength</td>
+                            <td>@b.estimatestature</td>
+                            <td>@b.osteophytosis</td>
+                            <td>@b.caries_periodontal_disease</td>
+                            <td>@b.notes</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
