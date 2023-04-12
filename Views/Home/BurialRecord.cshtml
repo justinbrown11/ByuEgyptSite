@@ -9,13 +9,13 @@ details captured about the mummy or items included in its burial.)-->
 
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a class="nav-link" href="#"><button class="btn btn-warning">Overview</button></a>
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-warning">Overview</button></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"><button class="btn btn-outline-warning">Textiles</button></a>
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Textiles</button></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"><button class="btn btn-outline-warning">Body Analysis</button></a>
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Body Analysis</button></a>
     </li>
 </ul>
 
