@@ -10,10 +10,50 @@ select specific records for more details-->
 <div class="container-fluid">
     <div class="row m-1 p-1">
         <div class="col-3">
-            <h3>Data Menu will go here</h3>
+            <h3>Filters</h3>
+            @using (Html.BeginForm("BurialSummary", "Home", FormMethod.Get))
+            {
+                <input name="pageNumber" type="hidden" value=1/>
+
+                <label>Textile Color</label>
+                <input name="textColor"/>
+
+                <label>Textile Structure</label>
+                <input name="structure" />
+
+                <label>Sex</label>
+                <input name="sex"/>
+
+                <label>Burial Depth</label>
+                <input name="depth"/>
+@*
+                <label>Stature</label>
+                <input name="stature"/>*@
+
+                <label>Age at Death</label>
+                <input name="ageatdeath"/>
+
+                <label>Head Direction</label>
+                <input name="headDirection"/>
+
+                <label>Burial ID</label>
+                <input name="burialid"/>
+
+                <label>Hair Color</label>
+                <input name="hairColor"/>
+
+                <label>Face Bundle</label>
+                <input name="faceBundle"/>
+
+                <input class="btn btn-warning" type="submit" value="Search">
+            }
         </div>
 
         <div class="col-9">
+            @if (Model.Count < 0)
+            {
+                <p>No results</p>
+            }
             @foreach (var b in Model)
             {
                 <div class="card card-outline-primary m-1 p-1">
@@ -42,7 +82,7 @@ select specific records for more details-->
 
                     <div class="bg-light p-1">
                         <h4>Burial Location: @(b.squarenorthsouth + " " + b.northsouth + " " + b.squareeastwest + " " + b.eastwest + " " + b.area + " " + b.burialnumber)</h4>
-                        <span class="badge sex-color" style="float:right">
+                        <span class="badge sex-color">
                             @(b.sex == "M" ? "Male" : b.sex == "F" ? "Female" : "Unknown Sex")
                         </span>
                     </div>
@@ -80,7 +120,7 @@ select specific records for more details-->
                         </span>
 
                         <span class="card-text">
-                            <button class="btn btn-warning btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">View Details</a></button>
+                            <button class="btn btn-warning btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Home" asp-action="BurialRecord" asp-route-burialId="@b.id">View Details</a></button>
                         </span>
                     </div>
                 </div>
