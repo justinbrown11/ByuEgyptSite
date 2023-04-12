@@ -49,6 +49,6 @@ namespace ByuEgyptSite.Models
         public string? shaftnumber { get; set; }
         public string? burialmainid { get; set; }
         public ICollection<BurialTextile> burialTextiles { get; set; }
-        public List<BodyAnalysis> BodyAnalyses { get; set; }
+        public ICollection<BodyAnalysis> bodyAnalyses { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace ByuEgyptSite.Models
         public string? thickness { get; set; }
         public string? angle { get; set; }
         public string? manipulation { get; set; }
+        public string? material { get; set; }
         public string? count { get; set; }
         public string? component { get; set; }
         public string? ply { get; set; }

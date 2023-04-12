@@ -32,7 +32,7 @@ namespace ByuEgyptSite.Controllers
 
         public IActionResult BurialRecord(long burialid)
         {
-            var record = _context.Burials.Include(b => b.burialTextiles).Single(x => x.id == burialid);
+            var record = _context.Burials.Single(x => x.id == burialid);
             return View(record);
         }
 
@@ -75,13 +75,13 @@ namespace ByuEgyptSite.Controllers
             return View(record);
         }
 
-        //public IActionResult BurialRecordBodyAnalysis(long burialid)
-        //{
-        //    var record = _context.Burials
-        //        .Include(b => b.BodyAnalyses)
-        //        .Single(x => x.id == burialid);
-        //    return View(record);
-        //}
+        public IActionResult BurialRecordBodyAnalysis(long burialid)
+        {
+            var record = _context.Burials
+                .Include(b => b.bodyAnalyses)
+                .Single(x => x.id == burialid);
+            return View(record);
+        }
 
         [HttpGet]
         public IActionResult BurialSummary(int? pageNumber, 
@@ -103,10 +103,10 @@ namespace ByuEgyptSite.Controllers
                 predicate = predicate.And(b => b.burialTextiles.Any(bt => bt.Textile.structureTextiles.Any(st => Regex.IsMatch(st.Structure.value, structure))));
             }
 
-            //if (!string.IsNullOrEmpty(stature))
-            //{
-            //    predicate = predicate.And(b => b.BodyAnalyses.Any(ba => Regex.IsMatch(ba.estimatestature, stature)));
-            //}
+            if (!string.IsNullOrEmpty(stature))
+            {
+                predicate = predicate.And(b => b.bodyAnalyses.Any(ba => Regex.IsMatch(ba.estimatestature, stature)));
+            }
 
             if (!string.IsNullOrEmpty(sex))
             {
@@ -171,6 +171,18 @@ namespace ByuEgyptSite.Controllers
 
             var paginatedBurials = PaginatedList<Burial>.Create(burials,
                 pageNumber ?? 1, pageSize);
+
+            ViewData["textColor"] = textColor;
+            ViewData["structure"] = structure;
+            ViewData["sex"] = sex;
+            ViewData["depth"] = depth;
+            ViewData["stature"] = stature;
+            ViewData["ageAtDeath"] = ageatdeath;
+            ViewData["headDirection"] = headDirection;
+            ViewData["burialId"] = burialid;
+            ViewData["textileFunction"] = textileFunction;
+            ViewData["hairColor"] = hairColor;
+            ViewData["faceBundle"] = faceBundle;
 
             return View(paginatedBurials);
         }
