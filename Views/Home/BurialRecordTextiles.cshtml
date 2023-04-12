@@ -1,0 +1,55 @@
+﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
+details captured about the mummy or items included in its burial.)-->
+@{
+    ViewData["Title"] = "Burial Record Textiles";
+}
+
+@model Burial
+
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Overview</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-warning">Textiles</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Body Analysis</button></a>
+    </li>
+</ul>
+
+</br>
+
+<div class="row">
+    <div class="col">
+        <h3 class="text-center">Textiles</h3>
+        <br />
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <th>Locale</th>
+                <th>Textile Id</th>
+                <th>Description</th>
+                <th>Burial Number</th>
+                <th>Estimated Period</th>
+                <th>Sample Date</th>
+                <th>Photograpded Date</th>
+                <th>Direction</th>
+            </thead>
+            <tbody>
+                @foreach (BurialTextile t in Model.burialTextiles)
+                {
+                    <tr>
+                        <td>@t.Textile.locale</td>
+                        <td>@t.Textile.textileid</td>
+                        <td>@t.Textile.description</td>
+                        <td>@t.Textile.burialnumber</td>
+                        <td>@t.Textile.estimatedperiod</td>
+                        <td>@t.Textile.sampledate</td>
+                        <td>@t.Textile.photographeddate</td>
+                        <td>@t.Textile.direction</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

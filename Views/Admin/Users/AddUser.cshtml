@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+@model ByuEgyptSite.Models.UserViewModel
+
+<div class="container p-3 bg-light">
+    <div class="d-flex justify-content-center">
+        <form method="post">
+            <label asp-for="UserName">UserName:</label>
+            <input asp-for="UserName" /><br />
+
+            <label asp-for="Email">Email:</label>
+            <input asp-for="Email" /><br />
+
+            <label asp-for="Roles">Roles:</label>
+            <input asp-for="Roles" /><br />
+
+            <label asp-for="SelectedRoles">Selected Roles:</label>
+            <select asp-for="SelectedRoles">
+                <option value="Administrator">Administrator</option>
+                <option value="Researcher">Researcher</option>
+            </select><br />
+
+            <div class="d-flex justify-content-center"><button type="submit">Save Changes</button></div>
+
+            <div asp-validation-summary="All"></div>
+        </form>
+    </div>
+</div>

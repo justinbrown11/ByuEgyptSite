@@ -1,0 +1,129 @@
+﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
+details captured about the mummy or items included in its burial.)-->
+
+@{
+    ViewData["Title"] = "Burial Record";
+}
+
+@model Burial
+
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-warning">Overview</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Textiles</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Body Analysis</button></a>
+    </li>
+</ul>
+
+</br>
+
+<div class="row">
+    <div class="col">
+        <h3 class="text-center">Overview</h3>
+        <br/>
+        <table class="table table-bordered table-hover table-striped">
+            <tbody>
+                <tr>
+                    <th>Location</th>
+                    <td>@(Model.squarenorthsouth + " " + Model.northsouth + " " + Model.squareeastwest + " " + Model.eastwest + " " + Model.area + " " + Model.burialnumber)</td>
+                </tr>
+                <tr>
+                    <th>Sex</th>
+                    <td>@Model.sex</td>
+                </tr>
+                <tr>
+                    <th>Depth</th>
+                    <td>@Model.depth</td>
+                </tr>
+                <tr>
+                    <th>Adult Sub Adult</th>
+                    <td>@Model.adultsubadult</td>
+                </tr>
+                <tr>
+                    <th>Face Bundles</th>
+                    <td>@Model.facebundles</td>
+                </tr>
+                <tr>
+                    <th>Preservation</th>
+                    <td>@Model.preservation</td>
+                </tr>
+                <tr>
+                    <th>Field Book Page</th>
+                    <td>@Model.fieldbookpage</td>
+                </tr>
+                <tr>
+                    <th>Goods</th>
+                    <td>@Model.goods</td>
+                </tr>
+                                <tr>
+                    <th>Notes</th>
+                    <td>@Model.text</td>
+                </tr>
+                                <tr>
+                    <th>Wrapping</th>
+                    <td>@Model.wrapping</td>
+                </tr>
+                                <tr>
+                    <th>Haircolor</th>
+                    <td>@Model.haircolor</td>
+                </tr>
+                <tr>
+                    <th>Samples Collected</th>
+                    <td>@Model.samplescollected</td>
+                </tr>
+                <tr>
+                    <th>Length</th>
+                    <td>@Model.length</td>
+                </tr>
+                <tr>
+                    <th>Burial Number</th>
+                    <td>@Model.burialnumber</td>
+                </tr>
+                <tr>
+                    <th>Data Expert</th>
+                    <td>@Model.dataexpertinitials</td>
+                </tr>
+                <tr>
+                    <th>Ageat Death</th>
+                    <td>@Model.ageatdeath</td>
+                </tr>
+                <tr>
+                    <th>Excavation Recorder</th>
+                    <td>@Model.excavationrecorder</td>
+                </tr>
+                <tr>
+                    <th>Photos</th>
+                    <td>@Model.photos</td>
+                </tr>
+                <tr>
+                    <th>Hair</th>
+                    <td>@Model.hair</td>
+                </tr>
+                <tr>
+                    <th>Burial Materials</th>
+                    <td>@Model.burialmaterials</td>
+                </tr>
+                <tr>
+                    <th>Date of Excavation</th>
+                    <td>@Model.dateofexcavation</td>
+                </tr>
+                <tr>
+                    <th>Field Book Excavation Year</th>
+                    <td>@Model.fieldbookexcavationyear</td>
+                </tr>
+                <tr>
+                    <th>Cluster Number</th>
+                    <td>@Model.clusternumber</td>
+                </tr>
+                <tr>
+                    <th>Shaft Number</th>
+                    <td>@Model.shaftnumber</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
