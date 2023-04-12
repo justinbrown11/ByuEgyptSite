@@ -46,20 +46,59 @@ namespace ByuEgyptSite.Controllers
         [HttpPost]
 
         // Given a valid record entry, add the entry to the database _burialContext
-        // and return the AddRecord Confirmation view along with the entry name
-        public IActionResult AddRecord(Burial bur)
+        // and return a view
+        public IActionResult AddRecord(
+         string? squarenorthsouth,
+         string? headdirection,
+         string? sex,
+         string? northsouth,
+         string? depth,
+         string? eastwest,
+         string? adultsubadult,
+         string? facebundles,
+         string? southtohead,
+         string? preservation,
+         string? fieldbookpage,
+         string? squareeastwest,
+         string? goods,
+         string? text,
+         string? wrapping,
+         string? haircolor,
+         string? westtohead,
+         string? samplescollected,
+         string? area,
+         long? burialid,
+         string? length,
+         string? burialnumber,
+         string? dataexpertinitials,
+         string? westtofeet,
+         string? ageatdeath,
+         string? southtofeet,
+         string? excavationrecorder,
+         string? photos,
+         string? hair,
+         string? burialmaterials,
+         DateTime? dateofexcavation,
+         string? fieldbookexcavationyear,
+         string? clusternumber,
+         string? shaftnumber,
+         string? burialmainid
+)
         {
-            if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
-            {
-                _burialContext.Add(bur);
-                _burialContext.SaveChanges();
+            //if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
+            //{
+            //    byte[] bytes = Guid.NewGuid().ToByteArray();
+            //    long randomId = BitConverter.ToInt64(bytes, 0);
 
-                return View("/Views/Admin/Records/AddRecordConfirmation.cshtml", bur);
-            }
-            else // If entry is invalid, return AddRecord view with record to be added
-            {
-                return View(bur);
-            }
+            //    _burialContext.Add(bur);
+            //    _burialContext.SaveChanges();
+
+                return RedirectToAction("BurialSummary", "Home");
+            //}
+            //else // If entry is invalid, return AddRecord view with record to be added
+            //{
+            //    return View(bur);
+            //}
         }
 
 

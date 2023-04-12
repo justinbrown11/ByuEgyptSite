@@ -51,10 +51,12 @@ namespace ByuEgyptSite.Data
                 .HasKey(at => new { at.TextileId, at.AnalysisId });
             builder.Entity<PhotoDataTextile>()
                 .HasKey(at => new { at.TextileId, at.PhotoDataId });
-            //builder.Entity<Burial>()
-            //    .HasMany(b => b.BodyAnalyses)
-            //    .WithOne(ba => ba.Burial)
-            //    .HasForeignKey(ba => ba.burialmainid);
+            builder.Entity<BodyAnalysis>()
+                .HasOne(d => d.Burial)
+                .WithMany(p => p.bodyAnalyses)
+                .HasPrincipalKey(p => p.burialmainid)
+                .HasForeignKey(d => d.burialmainid)
+                .HasConstraintName("burialmainfk");
 
 
             base.OnModelCreating(builder);

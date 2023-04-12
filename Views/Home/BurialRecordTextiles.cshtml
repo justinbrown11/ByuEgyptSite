@@ -20,12 +20,13 @@ details captured about the mummy or items included in its burial.)-->
 
 </br>
 
-<div class="row">
-    <div class="col">
-        <h3 class="text-center">Textiles</h3>
-        <br />
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">Textiles</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
                 <th>Locale</th>
                 <th>Textile Id</th>
                 <th>Description</th>
@@ -34,22 +35,220 @@ details captured about the mummy or items included in its burial.)-->
                 <th>Sample Date</th>
                 <th>Photograpded Date</th>
                 <th>Direction</th>
-            </thead>
-            <tbody>
-                @foreach (BurialTextile t in Model.burialTextiles)
-                {
-                    <tr>
-                        <td>@t.Textile.locale</td>
-                        <td>@t.Textile.textileid</td>
-                        <td>@t.Textile.description</td>
-                        <td>@t.Textile.burialnumber</td>
-                        <td>@t.Textile.estimatedperiod</td>
-                        <td>@t.Textile.sampledate</td>
-                        <td>@t.Textile.photographeddate</td>
-                        <td>@t.Textile.direction</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        <tr>
+                            <td>@t.Textile.locale</td>
+                            <td>@t.Textile.textileid</td>
+                            <td>@t.Textile.description</td>
+                            <td>@t.Textile.burialnumber</td>
+                            <td>@t.Textile.estimatedperiod</td>
+                            <td>@t.Textile.sampledate</td>
+                            <td>@t.Textile.photographeddate</td>
+                            <td>@t.Textile.direction</td>
+                        </tr>
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Photos</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Description</th>
+                <th>Filename</th>
+                <th>Photo Data Id</th>
+                <th>Date</th>
+                <th>Url</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (PhotoDataTextile p in t.Textile.photoDataTextiles)
+                        {
+                            <tr>
+                                <td>@p.PhotoData.description</td>
+                                <td>@p.PhotoData.filename</td>
+                                <td>@p.PhotoData.photodataid</td>
+                                <td>@p.PhotoData.date</td>
+                                <td>@p.PhotoData.url</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+        </div>
+
+        <div class="col">
+
+            <h3 class="text-center">Analysis</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Analysis Type</th>
+                <th>Done By</th>
+                <th>Analysis Id</th>
+                <th>Date</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (AnalysisTextile a in t.Textile.analysisTextiles)
+                        {
+                            <tr>
+                                <td>@a.Analysis.analysistype</td>
+                                <td>@a.Analysis.doneby</td>
+                                <td>@a.Analysis.analysisid</td>
+                                <td>@a.Analysis.date</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Decoration</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Decoration Id</th>
+                <th>Value</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (DecorationTextile d in t.Textile.decorationTextiles)
+                        {
+                            <tr>
+                                <td>@d.Decoration.decorationid</td>
+                                <td>@d.Decoration.value</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Dimension</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Dimension Type</th>
+                <th>Value</th>
+                <th>Dimension Id</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (DimensionTextile d in t.Textile.dimensionTextiles)
+                        {
+                            <tr>
+                                <td>@d.Dimension.dimensiontype</td>
+                                <td>@d.Dimension.value</td>
+                                <td>@d.Dimension.dimensionid</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Structure</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Value</th>
+                <th>Struture Id</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (StructureTextile s in t.Textile.structureTextiles)
+                        {
+                            <tr>
+                                <td>@s.Structure.value</td>
+                                <td>@s.Structure.structureid</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Color</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Value</th>
+                <th>Color Id</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (ColorTextile c in t.Textile.colorTextiles)
+                        {
+                            <tr>
+                                <td>@c.Color.value</td>
+                                <td>@c.Color.colorid</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Textile Function</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Value</th>
+                <th>Textile Function Id</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (TextileFunctionTextile tf in t.Textile.textileFunctionTextiles)
+                        {
+                            <tr>
+                                <td>@tf.TextileFunction.value</td>
+                                <td>@tf.TextileFunction.textilefunctionid</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+
+            <h3 class="text-center">Yarn Manipulation</h3>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Thickness</th>
+                <th>Angle</th>
+                <th>Manipulation</th>
+                <th>Material</th>
+                <th>Count</th>
+                <th>Component</th>
+                <th>Ply</th>
+                <th>Yarn Manipulation Id</th>
+                <th>Direction</th>
+                </thead>
+                <tbody>
+                    @foreach (BurialTextile t in Model.burialTextiles)
+                    {
+                        foreach (YarnManipulationTextile y in t.Textile.yarnManipulationTextiles)
+                        {
+                            <tr>
+                                <td>@y.YarnManipulation.thickness</td>
+                                <td>@y.YarnManipulation.angle</td>
+                                <td>@y.YarnManipulation.manipulation</td>
+                                <td>@y.YarnManipulation.material</td>
+                                <td>@y.YarnManipulation.count</td>
+                                <td>@y.YarnManipulation.component</td>
+                                <td>@y.YarnManipulation.ply</td>
+                                <td>@y.YarnManipulation.yarnmanipulationid</td>
+                                <td>@y.YarnManipulation.direction</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table><br />
+        </div>
     </div>
 </div>
