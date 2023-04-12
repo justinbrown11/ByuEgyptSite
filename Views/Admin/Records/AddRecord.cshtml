@@ -3,33 +3,212 @@
     ViewData["Title"] = "Add Burial Record";
 }
 
-@*@model (modelName)*@
-
 <div class="container p-3 bg-light">
-    <div class="d-flex justify-content-center">
-@*        <form method="post">
+    <div class="d-flex justify-content-center text-center">
+        <form method="post" asp-controller="Researcher" asp-action="AddRecord">
+
+            <div class="modal fade" id="confirm-add-modal" tabindex="-1" aria-labelledby="confirm-add-modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirm-add-modal-title">Confirm New Record</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to remove this item?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <input class="btn btn-warning" type="submit" value="Save" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <label asp-for="Title">Title:</label>
-            <input asp-for="Title" /><br />
+            <div class="form-group">
+                <label>Square North South</label><br/>
+                <input name="squarenorthsouth" /><br />
+            </div><br />
 
-            <label asp-for="Year">Year:</label>
-            <input asp-for="Year" /><br />
+            <div class="form-group">
+                <label>North South</label><br/>
+                <input name="northsouth" /><br />
+            </div><br />
 
-            <label asp-for="Director">Director:</label>
-            <input asp-for="Director" /><br />
+            <div class="form-group">
+                <label>Square East West</label><br/>
+                <input name="squareeastwest" /><br />
+            </div><br />
 
-            <label asp-for="Rating">Rating:</label>
-            <select asp-for="Rating">
-                <option value="G">G</option>
-                <option value="PG">PG</option>
-                <option value="PG-13">PG-13</option>
-                <option value="R">R</option>
-            </select><br />
+            <div class="form-group">
+                <label>East West</label><br/>
+                <input name="eastwest" /><br />
+            </div><br />
 
-            <div class="d-flex justify-content-center"><button type="submit">Save record</button></div>
+            <div class="form-group">
+                <label>Area</label><br/>
+                <input name="area" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Head Direction</label><br/>
+                <input name="headdirection" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Sex</label><br/>
+                <input name="sex" placeholder="M or F"/><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Depth</label><br/>
+                <input name="depth" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label></label><br/>
+                <input name="" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Adult Sub Adult</label><br/>
+                <input name="adultsubadult" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Face Bundles</label><br/>
+                <input name="facebundles" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>South To Head</label><br/>
+                <input name="southtohead" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Preservation</label><br/>
+                <input name="preservation" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Field Book Page</label><br/>
+                <input name="fieldbookpage" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Goods</label><br/>
+                <input name="goods" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Text</label><br/>
+                <input name="text" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Wrapping</label><br/>
+                <input name="wrapping" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Hair Color</label><br/>
+                <input name="haircolor" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>West To Head</label><br/>
+                <input name="westtohead" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Samples Collected</label><br/>
+                <input name="samplescollected" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Area</label><br/>
+                <input name="area" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>burialid</label><br/>
+                <input name="burialid" type="number"/><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Length</label><br/>
+                <input name="length" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Burial Number</label><br/>
+                <input name="burialnumber" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Data Expert Initials</label><br/>
+                <input name="dataexpertinitials" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>West To Feet</label><br/>
+                <input name="westtofeet" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Age At Death</label><br/>
+                <input name="ageatdeath" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>South To Feet</label><br/>
+                <input name="southtofeet" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Excavation Recorder</label><br/>
+                <input name="excavationrecorder" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Photos</label><br/>
+                <input name="photos" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Hair</label><br/>
+                <input name="hair" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Burial Materials</label><br/>
+                <input name="burialmaterials" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Date of Excavation</label><br/>
+                <input name="dateofexcavation" type="datetime" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Field Book Excavation Year</label><br/>
+                <input name="fieldbookexcavationyear" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Cluster Number</label><br/>
+                <input name="clusternumber" /><br />
+            </div><br />
+
+            <div class="form-group">
+                <label>Shaft Number</label><br/>
+                <input name="shaftnumber" /><br />
+            </div><br />
+
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirm-add-modal">Save Record</button>
 
             <div asp-validation-summary="All"></div>
-        </form>*@
+        </form>
     </div>
 </div>
 
