@@ -1,4 +1,4 @@
-﻿@*<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
+﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
 details captured about the mummy or items included in its burial.)-->
 @{
     ViewData["Title"] = "Burial Record Body Analysis";
@@ -11,10 +11,10 @@ details captured about the mummy or items included in its burial.)-->
         <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Overview</button></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-warning">Textiles</button></a>
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordTextiles" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Textiles</button></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Body Analysis</button></a>
+        <a class="nav-link" asp-controller="Home" asp-action="BurialRecordBodyAnalysis" asp-route-burialid=@Model.id><button class="btn btn-warning">Body Analysis</button></a>
     </li>
 </ul>
 
@@ -24,141 +24,83 @@ details captured about the mummy or items included in its burial.)-->
     <div class="col">
         <h3 class="text-center">Body Analysis</h3>
         <br />
-        <table class="table table-bordered table-hover table-striped">
-            <tbody>
-                <tr>
-                    <th>Date of Examination</th>
-                    <td>@Model.dateofexamination</td>
-                </tr>
-                <tr>
-                    <th>Preservation Index</th>
-                    <td>@Model.preservationindex</td>
-                </tr>
-                <tr>
-                    <th>Hair Color</th>
-                    <td>@Model.haircolor</td>
-                </tr>
-                <tr>
-                    <th>Observations</th>
-                    <td>@Model.observations</td>
-                </tr>
-                <tr>
-                    <th>Robust</th>
-                    <td>@Model.robust</td>
-                </tr>
-                <tr>
-                    <th>Supraorbitalridges</th>
-                    <td>@Model.supraorbitalridges</td>
-                </tr>
-                <tr>
-                    <th>Orbitedge</th>
-                    <td>@Model.orbitedge</td>
-                </tr>
-                <tr>
-                    <th>Parietal Bossing</th>
-                    <td>@Model.parietalbossing</td>
-                </tr>
-                <tr>
-                    <th>Gonion</th>
-                    <td>@Model.gonion</td>
-                </tr>
-                <tr>
-                    <th>Nuchal Crest</th>
-                    <td>@Model.nuchalcrest</td>
-                </tr>
-                <tr>
-                    <th>Zygomaticcrest</th>
-                    <td>@Model.zygomaticcrest</td>
-                </tr>
-                <tr>
-                    <th>Sphenooccipitalsynchrondrosis</th>
-                    <td>@Model.sphenooccipitalsynchrondrosis</td>
-                </tr>
-                <tr>
-                    <th>Lamboidsuture</th>
-                    <td>@Model.lamboidsuture</td>
-                </tr>
-                <tr>
-                    <th>Tooth Attrition</th>
-                    <td>@Model.toothattrition</td>
-                </tr>
-                <tr>
-                    <th>Tooth Eruption</th>
-                    <td>@Model.tootheruption</td>
-                </tr>
-                <tr>
-                    <th>Tooth Eruption Age Estimate</th>
-                    <td>@Model.tootheruptionageestimate</td>
-                </tr>
-                <tr>
-                    <th>Ventralarc</th>
-                    <td>@Model.ventralarc</td>
-                </tr>
-                <tr>
-                    <th>Subpubicangle</th>
-                    <td>@Model.subpubicangle</td>
-                </tr>
-                <tr>
-                    <th>Sciatic Notch</th>
-                    <td>@Model.sciaticnotch</td>
-                </tr>
-                <tr>
-                    <th>Pubic Bone</th>
-                    <td>@Model.pubicbone</td>
-                </tr>
-                <tr>
-                    <th>Preauricularsulcus</th>
-                    <td>@Model.preauricularsulcus</td>
-                </tr>
-                <tr>
-                    <th>Medial IP Ramus</th>
-                    <td>@Model.medial_ip_ramus</td>
-                </tr>
-                <tr>
-                    <th>Dorsalpitting</th>
-                    <td>@Model.dorsalpitting</td>
-                </tr>
-                <tr>
-                    <th>Femur</th>
-                    <td>@Model.femur</td>
-                </tr>
-                <tr>
-                    <th>Humerus</th>
-                    <td>@Model.humerus</td>
-                </tr>
-                <tr>
-                    <th>Femur Head Diameter</th>
-                    <td>@Model.femurheaddiameter</td>
-                </tr>
-                <tr>
-                    <th>Humerus Head Diameter</th>
-                    <td>@Model.humerusheaddiameter</td>
-                </tr>
-                <tr>
-                    <th>Femur Length</th>
-                    <td>@Model.femurlength</td>
-                </tr>
-                                <tr>
-                    <th>Humerus Length</th>
-                    <td>@Model.humeruslength</td>
-                </tr>
-                <tr>
-                    <th>Estimate Stature</th>
-                    <td>@Model.estimatestature</td>
-                </tr>
-                <tr>
-                    <th>Osteophytosis</th>
-                    <td>@Model.osteophytosis</td>
-                </tr>
-                <tr>
-                    <th>Caries Periodontal Disease</th>
-                    <td>@Model.caries_periodontal_disease</td>
-                </tr>
-                <tr>
-                    <th>Notes</th>
-                    <td>@Model.notes</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <th>Date of Examination</th>
+                <th>Preservation Index</th>
+                <th>Hair Color</th>
+                <th>Observations</th>
+                <th>Robust</th>
+                <th>Supraorbitalridges</th>
+                <th>Orbitedge</th>
+                <th>Parietal Bossing</th>
+                <th>Gonion</th>
+                <th>Nuchal Crest</th>
+                <th>Zygomaticcrest</th>
+                <th>Sphenooccipitalsynchrondrosis</th>
+                <th>Lamboidsuture</th>
+                <th>Tooth Attrition</th>
+                <th>Tooth Eruption</th>
+                <th>Tooth Eruption Age Estimate</th>
+                <th>Ventralarc</th>
+                <th>Subpubicangle</th>
+                <th>Sciatic Notch</th>
+                <th>Pubic Bone</th>
+                <th>Preauricularsulcus</th>
+                <th>Medial IP Ramus</th>
+                <th>Dorsalpitting</th>
+                <th>Femur</th>
+                <th>Humerus</th>
+                <th>Femur Head Diameter</th>
+                <th>Humerus Head Diameter</th>
+                <th>Femur Length</th>
+                <th>Humerus Length</th>
+                <th>Estimate Stature</th>
+                <th>Osteophytosis</th>
+                <th>Caries Periodontal Disease</th>
+                <th>Notes</th>
+                </thead>
+                <tbody>
+                    @foreach (BodyAnalysis b in Model.bodyAnalyses)
+                    {
+                        <tr>
+                            <td>@b.dateofexamination</td>
+                            <td>@b.preservationindex</td>
+                            <td>@b.haircolor</td>
+                            <td>@b.observations</td>
+                            <td>@b.orbitedge</td>
+                            <td>@b.parietalbossing</td>
+                            <td>@b.gonion</td>
+                            <td>@b.nuchalcrest</td>
+                            <td>@b.zygomaticcrest</td>
+                            <td>@b.sphenooccipitalsynchrondrosis</td>
+                            <td>@b.lamboidsuture</td>
+                            <td>@b.toothattrition</td>
+                            <td>@b.tootheruption</td>
+                            <td>@b.tootheruptionageestimate</td>
+                            <td>@b.ventralarc</td>
+                            <td>@b.subpubicangle</td>
+                            <td>@b.sciaticnotch</td>
+                            <td>@b.pubicbone</td>
+                            <td>@b.preauricularsulcus</td>
+                            <td>@b.medial_ip_ramus</td>
+                            <td>@b.dorsalpitting</td>
+                            <td>@b.femur</td>
+                            <td>@b.humerus</td>
+                            <td>@b.femurheaddiameter</td>
+                            <td>@b.humerusheaddiameter</td>
+                            <td>@b.femurlength</td>
+                            <td>@b.humeruslength</td>
+                            <td>@b.estimatestature</td>
+                            <td>@b.osteophytosis</td>
+                            <td>@b.caries_periodontal_disease</td>
+                            <td>@b.notes</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
     </div>
-</div>*@
+</div>
