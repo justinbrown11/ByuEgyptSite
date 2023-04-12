@@ -2,7 +2,7 @@
 
 namespace ByuEgyptSite.Models
 {
-    public class EditUserViewModel
+    public class UserViewModel
     {
         [Key]
         [Required]

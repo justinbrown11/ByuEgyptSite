@@ -62,6 +62,19 @@ namespace ByuEgyptSite.Controllers
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Function to edit table row (Get)
         [HttpGet]
         public IActionResult Edit(long burialId)
@@ -80,6 +93,17 @@ namespace ByuEgyptSite.Controllers
 
             return RedirectToAction("/Views/Home/BurialSummary.cshtml"); // update record and return to home burial list
         }
+
+
+
+
+
+
+
+
+
+
+
 
         // Function to delete table row (Post)
         [HttpPost]
