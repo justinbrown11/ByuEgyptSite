@@ -47,6 +47,8 @@ namespace ByuEgyptSite.Models
         public string? fieldbookexcavationyear { get; set; }
         public string? clusternumber { get; set; }
         public string? shaftnumber { get; set; }
+        public string? burialmainid { get; set; }
         public ICollection<BurialTextile> burialTextiles { get; set; }
+        public List<BodyAnalysis> BodyAnalyses { get; set; }
     }
 }

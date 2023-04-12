@@ -8,7 +8,7 @@ namespace ByuEgyptSite.Models
     {
         [Required]
         [Key]
-        public long MyProperty { get; set; }
+        public long id { get; set; }
         public int? analysistype { get; set; }
         public string? doneby { get; set; }
         public int? analysisid { get; set; }

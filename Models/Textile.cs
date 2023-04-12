@@ -20,7 +20,7 @@ namespace ByuEgyptSite.Models
         public ICollection<ColorTextile> colorTextiles { get; set; }
         public ICollection<DimensionTextile> dimensionTextiles { get; set; }
         public ICollection<BurialTextile> burialTextiles { get; set; }
-        public ICollection<StructureTextile> stuctureTextiles { get; set; }
+        public ICollection<StructureTextile> structureTextiles { get; set; }
         public ICollection<TextileFunctionTextile> textileFunctionTextiles { get; set; }
         public ICollection<YarnManipulationTextile> yarnManipulationTextiles { get; set; }
         public ICollection<DecorationTextile> decorationTextiles { get; set; }
