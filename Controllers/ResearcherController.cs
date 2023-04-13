@@ -13,7 +13,6 @@ using System.Text.Json;
 
 namespace ByuEgyptSite.Controllers
 {
-    [Authorize(Roles = "Administrator, Researcher")]
     public class ResearcherController : Controller
     {
         private readonly ILogger<ResearcherController> _logger;
@@ -27,6 +26,7 @@ namespace ByuEgyptSite.Controllers
         }
 
         // Return Supervised Analysis view
+        [Authorize(Roles = "Administrator, Researcher")]
         [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
@@ -34,6 +34,7 @@ namespace ByuEgyptSite.Controllers
         }
 
         // Post form destination for supervised analysis view
+        [Authorize(Roles = "Administrator, Researcher")]
         [HttpPost]
         public IActionResult SupervisedAnalysis(UserData data)
         {
@@ -41,6 +42,7 @@ namespace ByuEgyptSite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult AlterData(UserData data)
         {
             var temp = data;
@@ -54,11 +56,12 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
-            return View("/Views/Analysis/UnsupervisedAnalysis.cshtml");
+            return View("/Views/Researcher/UnsupervisedAnalysis.cshtml");
         }
         
         // The Add New Record View
         [HttpGet]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult AddRecord()
         {
             // For conditionals in view
@@ -69,6 +72,7 @@ namespace ByuEgyptSite.Controllers
 
         // Either adds/edits a record
         [HttpPost]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult AddEditRecord(Burial b)
         {
             if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
@@ -111,6 +115,7 @@ namespace ByuEgyptSite.Controllers
 
         // The Edit a record view (form)
         [HttpGet]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult Edit(long burialId)
         {
             var burial = _burialContext.Burials.Single(x => x.id == burialId);
@@ -123,6 +128,7 @@ namespace ByuEgyptSite.Controllers
 
         // Deletes a record
         [HttpPost]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult Delete(long burialid)
         {
             var record = _burialContext.Burials.Single(x => x.id == burialid);
