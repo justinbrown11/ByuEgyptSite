@@ -30,27 +30,152 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
-            return View("/Views/Researcher/SupervisedAnalysis.cshtml", new UserData());
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml", new DataToChange());
         }
 
         // Post form destination for supervised analysis view
         [Authorize(Roles = "Administrator, Researcher")]
         [HttpPost]
-        public IActionResult SupervisedAnalysis(UserData data)
+        public IActionResult SupervisedAnalysis(DataToChange data)
         {
             return RedirectToAction("AlterData","Researcher", data);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator, Researcher")]
-        public IActionResult AlterData(UserData data)
+        public IActionResult AlterData(DataToChange data)
         {
-            var temp = data;
+            var userData = new UserData();
+
+            userData.depth = data.depth;
+            userData.length = data.length;
+
+            if (data.area == "NE")
+            {
+                userData.area_NE = 1;
+                userData.area_NW = 0;
+                userData.area_SE = 0;
+                userData.area_SW = 0;
+            }
+            else if (data.area == "NW")
+            {
+                userData.area_NE = 0;
+                userData.area_NW = 1;
+                userData.area_SE = 0;
+                userData.area_SW = 0;
+            }
+            else if (data.area == "SE")
+            {
+                userData.area_NE = 0;
+                userData.area_NW = 0;
+                userData.area_SE = 1;
+                userData.area_SW = 0;
+            }
+            else if (data.area == "SW")
+            {
+                userData.area_NE = 0;
+                userData.area_NW = 0;
+                userData.area_SE = 0;
+                userData.area_SW = 1;
+            }
+            else
+            {
+                userData.area_NE = 0;
+                userData.area_NW = 0;
+                userData.area_SE = 0;
+                userData.area_SW = 0;
+            }
+
+            if (data.wrapping == "B")
+            {
+                userData.wrapping_B = 1;
+                userData.wrapping_H = 0;
+                userData.wrapping_W = 0;
+            }
+            else if (data.area == "H")
+            {
+                userData.wrapping_B = 0;
+                userData.wrapping_H = 1;
+                userData.wrapping_W = 0;
+            }
+            else if (data.area == "W")
+            {
+                userData.wrapping_B = 0;
+                userData.wrapping_H = 0;
+                userData.wrapping_W = 1;
+            }
+            else
+            {
+                userData.wrapping_B = 0;
+                userData.wrapping_H = 0;
+                userData.wrapping_W = 0;
+            }
+
+            if (data.samplescollected == "False")
+            {
+                userData.samplescollected_false = 1;
+                userData.samplescollected_true = 0;
+            }
+            else if (data.samplescollected == "True")
+            {
+                userData.samplescollected_false = 0;
+                userData.samplescollected_true = 1;
+            }
+            else
+            {
+                userData.samplescollected_false = 0;
+                userData.samplescollected_true = 0;
+            }
+
+            if (data.ageatdeath == "A")
+            {
+                userData.ageatdeath_A = 1;
+                userData.ageatdeath_C = 0;
+                userData.ageatdeath_I = 0;
+                userData.ageatdeath_N = 0;
+            }
+            else if (data.ageatdeath == "C")
+            {
+                userData.ageatdeath_A = 0;
+                userData.ageatdeath_C = 1;
+                userData.ageatdeath_I = 0;
+                userData.ageatdeath_N = 0;
+            }
+            else if (data.ageatdeath == "I")
+            {
+                userData.ageatdeath_A = 0;
+                userData.ageatdeath_C = 0;
+                userData.ageatdeath_I = 1;
+                userData.ageatdeath_N = 0;
+            }
+            else if (data.ageatdeath == "N")
+            {
+                userData.ageatdeath_A = 0;
+                userData.ageatdeath_C = 0;
+                userData.ageatdeath_I = 0;
+                userData.ageatdeath_N = 1;
+            }
+            else
+            {
+                userData.ageatdeath_A = 0;
+                userData.ageatdeath_C = 0;
+                userData.ageatdeath_I = 0;
+                userData.ageatdeath_N = 0;
+            }
+
+            var temp = userData;
             var json = JsonConvert.SerializeObject(temp);
             TempData["UserInput"] = json;
-            //var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            return RedirectToAction("Score", "Inference");
+        }
 
-            return RedirectToAction("Score","Inference");
+        [HttpGet]
+        public IActionResult SendPrediction()
+        {
+            string predictionJson = TempData["prediction"] as string;
+
+            ViewBag.Prediction = predictionJson;
+
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml");
         }
 
         [HttpGet]
