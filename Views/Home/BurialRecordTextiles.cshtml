@@ -1,11 +1,12 @@
-﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
-details captured about the mummy or items included in its burial.)-->
+﻿<!--Overview of burial record textiles-->
+
 @{
     ViewData["Title"] = "Burial Record Textiles";
 }
 
 @model Burial
 
+<!--Internal nav-->
 <ul class="nav justify-content-center">
     <li class="nav-item">
         <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Overview</button></a>
@@ -23,6 +24,8 @@ details captured about the mummy or items included in its burial.)-->
 <div class="container">
     <div class="row">
         <div class="col">
+
+            <!--Textiles overview table-->
             <h3 class="text-center">Textiles</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -53,6 +56,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile photos table-->
             <h3 class="text-center">Photos</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -83,6 +87,7 @@ details captured about the mummy or items included in its burial.)-->
 
         <div class="col">
 
+            <!--Textile analyses table-->
             <h3 class="text-center">Analysis</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -108,6 +113,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile decorations table-->
             <h3 class="text-center">Decoration</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -129,6 +135,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile dimensions table-->
             <h3 class="text-center">Dimension</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -152,6 +159,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile structures table-->
             <h3 class="text-center">Structure</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -173,6 +181,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile colors table-->
             <h3 class="text-center">Color</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -194,6 +203,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile functions table-->
             <h3 class="text-center">Textile Function</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">
@@ -215,6 +225,7 @@ details captured about the mummy or items included in its burial.)-->
                 </tbody>
             </table><br />
 
+            <!--Textile yarn manipulations table-->
             <h3 class="text-center">Yarn Manipulation</h3>
             <br />
             <table class="table table-bordered table-hover table-striped">

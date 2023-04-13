@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for textile photo data
+    /// </summary>
     [Table("photodata")]
     public class PhotoData
     {
@@ -14,6 +17,6 @@ namespace ByuEgyptSite.Models
         public int? photodataid { get; set; }
         public DateTime? date { get; set; }
         public string? url { get; set; }
-        public ICollection<PhotoDataTextile> photoDataTextiles { get; set; }
+        public ICollection<PhotoDataTextile> photoDataTextiles { get; set; } // association class to textiles
     }
 }
