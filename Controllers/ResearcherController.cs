@@ -1,5 +1,6 @@
 ﻿using ByuEgyptSite.Controllers;
 using ByuEgyptSite.Data;
+using ByuEgyptSite.MLModel;
 using ByuEgyptSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,9 +24,15 @@ namespace ByuEgyptSite.Controllers
         }
 
         // Return Supervised Analysis view
+        [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
-            return View("/Views/Analysis/SupervisedAnalysis.cshtml");
+            return View(new UserData());
+        }
+        [HttpPost]
+        public IActionResult SupervisedAnalysis(UserData data)
+        {
+            return View();
         }
 
         // Return Unsupervised Analysis view

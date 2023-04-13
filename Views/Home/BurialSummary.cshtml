@@ -193,11 +193,11 @@ select specific records for more details-->
                         }*@
 
                         <span class="card-text">
-                            <button class="btn btn-info btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">Edit</a></button>
+                            <a class="text-decoration-none" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id"><button class="btn btn-info btn-sm float-end m-1 text-white">Edit</button></a>
                         </span>
 
                         <span class="card-text">
-                            <button class="btn btn-warning btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Home" asp-action="BurialRecord" asp-route-burialId="@b.id">View Details</a></button>
+                            <a class="text-decoration-none" asp-controller="Home" asp-action="BurialRecord" asp-route-burialId="@b.id"><button class="btn btn-warning btn-sm float-end m-1 text-white">View Details</button></a>
                         </span>
                     </div>
                 </div>

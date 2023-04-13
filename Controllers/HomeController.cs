@@ -10,6 +10,7 @@ using LinqKit;
 
 namespace ByuEgyptSite.Controllers
 {
+    // Constructor
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

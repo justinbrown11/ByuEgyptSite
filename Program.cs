@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ByuEgyptSite;
+using Microsoft.ML.OnnxRuntime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,8 +79,25 @@ builder.Services.AddHsts(options =>
 });
 builder.Services.AddControllersWithViews();
 
+//line below is for Supervised Learning Model experimentation
+builder.Services.AddSwaggerGen();
+
+
+//line below is for Supervised Learning Model
+//added this below
+builder.Services.AddSingleton<InferenceSession>(
+  new InferenceSession("MLModel/myOnnxFile1.onnx")
+);
 
 var app = builder.Build();
+
+//added this for Supervised Learning Model
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // THIS IS NOT YET WORKING PROPERLY (won't login)
 // Create a scope to add proper roles and create an admin user
