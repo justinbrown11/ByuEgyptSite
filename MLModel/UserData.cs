@@ -1,4 +1,6 @@
-﻿namespace ByuEgyptSite.MLModel
+﻿using Microsoft.ML.OnnxRuntime.Tensors;
+
+namespace ByuEgyptSite.MLModel
 {
     public class UserData
     {
@@ -17,5 +19,18 @@
         public float ageatdeath_C { get; set; }
         public float ageatdeath_I { get; set; }
         public float ageatdeath_N { get; set; }
+
+        public Tensor<float> AsTensor() //prepare the object we'll use with the Onnx file
+        {
+            float[] data = new float[]
+            {
+            depth, length, area_NE,
+            area_NW, area_SE, area_SW, wrapping_B, wrapping_H, wrapping_W,
+            samplescollected_false, samplescollected_true, ageatdeath_A,
+            ageatdeath_C, ageatdeath_I, ageatdeath_N
+            };
+            int[] dimensions = new int[] { 1, 15 }; //***adjust this number to match the number of inputs we have (8 was here)
+            return new DenseTensor<float>(data, dimensions);
+        }
     }
 }

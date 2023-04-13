@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
+using System.Text.Json;
+
 
 namespace ByuEgyptSite.Controllers
 {
@@ -27,13 +29,51 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
-            return View(new UserData());
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml", new UserData());
         }
+
+
         [HttpPost]
         public IActionResult SupervisedAnalysis(UserData data)
         {
-            return View();
+            return RedirectToAction("AlterData","Researcher", data);
         }
+
+        public IActionResult AlterData(UserData data)
+        {
+            var temp = data;
+            var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+            return Content(json, "application/json");
+        }
+
+
+        //[HttpGet]
+        //public IActionResult AlterData(UserData data)
+        //{
+        //    var temp = data;
+        //    var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+        //    return RedirectToAction("AlterData", new {data = json});
+        //}
+
+        //[HttpPost]
+        //public IActionResult AlterData(UserData data)
+        //{
+        //    var temp = data;
+        //    var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+        //    return RedirectToAction("Score", "Inference", new { data = json });
+        //}
+
+
+        //[HttpGet]
+        //public IActionResult Test(UserData data)
+        //{
+        //    var temp = data;
+
+        //    return View(temp);
+        //}
 
         // Return Unsupervised Analysis view
         public IActionResult UnsupervisedAnalysis()

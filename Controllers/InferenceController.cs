@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ByuEgyptSite.MLModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 
@@ -16,7 +17,7 @@ namespace ByuEgyptSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Score(HousingData data)
+        public ActionResult Score(UserData data)
         {
             var result = _session.Run(new List<NamedOnnxValue> //this is where we actually score our model
             {
