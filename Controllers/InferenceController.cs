@@ -18,11 +18,9 @@ namespace ByuEgyptSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult Score()
+        public ActionResult Score(string json)
         {
-            var json = TempData["UserInput"] as string;
             var data = JsonConvert.DeserializeObject<UserData>(json);
-            //var data = TempData["UserInput"] as UserData;
 
             var result = _session.Run(new List<NamedOnnxValue> //this is where we actually score our model
             {
@@ -32,9 +30,9 @@ namespace ByuEgyptSite.Controllers
             string score = result.First().AsTensor<string>().ToArray()[0];
             var prediction = new Prediction { PredictedValue = score };
             //Added to send prediction to view
-            TempData["prediction"] = JsonConvert.SerializeObject(prediction);
+            string json2 = JsonConvert.SerializeObject(prediction);
 
-            return RedirectToAction("SendPrediction", "Researcher");
+            return RedirectToAction("SendPrediction", "Researcher", new { json = json2 });
         }
     }
 }
