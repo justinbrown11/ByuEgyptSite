@@ -70,4 +70,25 @@
     <div class="float-end">
         <input class="btn btn-primary" type="submit" value="Enter" />
     </div>
+
+    @if(ViewBag.Prediction is not null)
+    {
+        dynamic prediction = Newtonsoft.Json.JsonConvert.DeserializeObject(ViewBag.Prediction);
+        string predictedValue = prediction.PredictedValue;
+        string headDirection = "";
+
+        if(predictedValue == "W")
+        {
+            headDirection = "West";
+        }
+
+        if (predictedValue == "E")
+        {
+            headDirection = "East";
+        }
+
+        <h4>Based on your inputs, we predict that the "head direction" for this burial is: <h2>@headDirection</h2></h4>
+    }
+
+
 </form>
