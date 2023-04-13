@@ -1,21 +1,24 @@
-﻿using ByuEgyptSite.Controllers;
+using ByuEgyptSite.Controllers;
 using ByuEgyptSite.Data;
+using ByuEgyptSite.MLModel;
 using ByuEgyptSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Diagnostics;
+using System.Text.Json;
+
 
 namespace ByuEgyptSite.Controllers
 {
-    //[Authorize(Roles = "Administrator, Researcher")]
-
-    // Constructor
     public class ResearcherController : Controller
     {
         private readonly ILogger<ResearcherController> _logger;
-        private ApplicationDbContext _burialContext { get; set; }
+        private ApplicationDbContext _burialContext { get; set; } // Add db context
+
+        // Constructor
         public ResearcherController(ILogger<ResearcherController> logger, ApplicationDbContext ac)
         {
             _logger = logger;
@@ -23,136 +26,117 @@ namespace ByuEgyptSite.Controllers
         }
 
         // Return Supervised Analysis view
+        [Authorize(Roles = "Administrator, Researcher")]
+        [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
-            return View("/Views/Analysis/SupervisedAnalysis.cshtml");
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml", new UserData());
         }
 
-        // Return Unsupervised Analysis view
-        public IActionResult UnsupervisedAnalysis()
+        // Post form destination for supervised analysis view
+        [Authorize(Roles = "Administrator, Researcher")]
+        [HttpPost]
+        public IActionResult SupervisedAnalysis(UserData data)
         {
-            return View("/Views/Analysis/UnsupervisedAnalysis.cshtml");
-        }
-
-        // Adding and editing records
-        
-        [HttpGet]
-        // Return the AddRecord view
-        public IActionResult AddRecord()
-        {
-            return View("/Views/Admin/Records/AddRecord.cshtml");
+            return RedirectToAction("AlterData","Researcher", data);
         }
 
         [HttpPost]
-
-        // Given a valid record entry, add the entry to the database _burialContext
-        // and return a view
-        public IActionResult AddRecord(
-         string? squarenorthsouth,
-         string? headdirection,
-         string? sex,
-         string? northsouth,
-         string? depth,
-         string? eastwest,
-         string? adultsubadult,
-         string? facebundles,
-         string? southtohead,
-         string? preservation,
-         string? fieldbookpage,
-         string? squareeastwest,
-         string? goods,
-         string? text,
-         string? wrapping,
-         string? haircolor,
-         string? westtohead,
-         string? samplescollected,
-         string? area,
-         long? burialid,
-         string? length,
-         string? burialnumber,
-         string? dataexpertinitials,
-         string? westtofeet,
-         string? ageatdeath,
-         string? southtofeet,
-         string? excavationrecorder,
-         string? photos,
-         string? hair,
-         string? burialmaterials,
-         DateTime? dateofexcavation,
-         string? fieldbookexcavationyear,
-         string? clusternumber,
-         string? shaftnumber,
-         string? burialmainid
-)
+        [Authorize(Roles = "Administrator, Researcher")]
+        public IActionResult AlterData(UserData data)
         {
-            //if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
-            //{
-            //    byte[] bytes = Guid.NewGuid().ToByteArray();
-            //    long randomId = BitConverter.ToInt64(bytes, 0);
+            var temp = data;
+            var json = JsonConvert.SerializeObject(temp);
+            TempData["UserInput"] = json;
+            //var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
-            //    _burialContext.Add(bur);
-            //    _burialContext.SaveChanges();
-
-                return RedirectToAction("BurialSummary", "Home");
-            //}
-            //else // If entry is invalid, return AddRecord view with record to be added
-            //{
-            //    return View(bur);
-            //}
+            return RedirectToAction("Score","Inference");
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Function to edit table row (Get)
         [HttpGet]
+        public IActionResult UnsupervisedAnalysis()
+        {
+            return View("/Views/Researcher/UnsupervisedAnalysis.cshtml");
+        }
+        
+        // The Add New Record View
+        [HttpGet]
+        [Authorize(Roles = "Administrator, Researcher")]
+        public IActionResult AddRecord()
+        {
+            // For conditionals in view
+            ViewData["Type"] = "add";
+
+            return View("/Views/Admin/Records/AddEditRecord.cshtml");
+        }
+
+        // Either adds/edits a record
+        [HttpPost]
+        [Authorize(Roles = "Administrator, Researcher")]
+        public IActionResult AddEditRecord(Burial b)
+        {
+            if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
+            {
+                // Generate random 64 bit id
+                byte[] bytes = Guid.NewGuid().ToByteArray();
+                long randomId = BitConverter.ToInt64(bytes, 0);
+
+                // Simply to hold for later use
+                var id = b.id;
+
+                // If id is passed, keep it, if not, use the randomly generated one
+                b.id = b.id != 0 ? b.id : randomId;
+
+                // If burialmainid was passed, use it, if not, generate it
+                b.burialmainid = b.burialmainid != null ? b.burialmainid : $"{b.squarenorthsouth}{b.northsouth}{b.squareeastwest}{b.eastwest}{b.area}{b.burialnumber}";
+
+                // Adding a new record
+                if (id == 0)
+                {
+                    _burialContext.Burials.Add(b);
+                }
+
+                // Editing an existing record
+                else
+                {
+                    _burialContext.Update(b);
+                }
+
+                _burialContext.SaveChanges(); // save changes
+
+                // Redirect to burial record list
+                return RedirectToAction("BurialSummary", "Home");
+            }
+            else // If entry is invalid, return View with issues
+            {
+                return View("/Views/Admin/Records/AddEditRecord.cshtml", b);
+            }
+        }
+
+        // The Edit a record view (form)
+        [HttpGet]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult Edit(long burialId)
         {
             var burial = _burialContext.Burials.Single(x => x.id == burialId);
 
-            return View("/Views/Admin/Records/AddRecord.cshtml", burial); // return the AddRecord view along with the record for the single entry
+            // For conditionals in view
+            ViewData["Type"] = "edit";
+
+            return View("/Views/Admin/Records/AddEditRecord.cshtml", burial); // return the AddRecord view along with the record for the single entry
         }
 
-        // Function to edit table row (Post)
+        // Deletes a record
         [HttpPost]
-        public IActionResult Edit(Burial bur)
-        {
-            _burialContext.Update(bur);
-            _burialContext.SaveChanges();
-
-            return RedirectToAction("/Views/Home/BurialSummary.cshtml"); // update record and return to home burial list
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        // Function to delete table row (Post)
-        [HttpPost]
-        public IActionResult DeleteRecordConfirmed(long burialid)
+        [Authorize(Roles = "Administrator, Researcher")]
+        public IActionResult Delete(long burialid)
         {
             var record = _burialContext.Burials.Single(x => x.id == burialid);
             _burialContext.Burials.Remove(record);
             _burialContext.SaveChanges();
 
-            return RedirectToAction("BurialSummary", "home"); // delete record and return confirmation view
+            // Redirect back to burial record list view
+            return RedirectToAction("BurialSummary", "Home");
         }
     }
 }

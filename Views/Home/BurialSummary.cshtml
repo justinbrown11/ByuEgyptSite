@@ -1,4 +1,4 @@
-﻿<!--Paginated list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
+﻿<!--Paginated/filtered list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
 select specific records for more details-->
 
 @model PaginatedList<Burial>
@@ -9,6 +9,8 @@ select specific records for more details-->
 
 <div class="container-fluid">
     <div class="row m-1 p-1">
+
+        <!--Filter form-->
         <div class="col-3">
             <h3>Filters</h3>
             @using (Html.BeginForm("BurialSummary", "Home", FormMethod.Get))
@@ -17,14 +19,14 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Textile Color</label><br/>
-                    <input name="textColor" @if (ViewData["textColor"] != null) { @($"value={ViewData["textColor"]}") } />
+                    <input placeholder="e.g. Yellow" name="textColor" @if (ViewData["textColor"] != null) { @($"value={ViewData["textColor"]}") } />
                 </div>
 
                 <br />
 
                 <div class="form-group text-center">
                     <label>Textile Structure</label><br />
-                    <input name="structure" @if (ViewData["structure"] != null)
+                    <input placeholder="e.g. Plain Weave" name="structure" @if (ViewData["structure"] != null)
                     {
                         @($"value={ViewData["structure"]}")
                     } />
@@ -34,7 +36,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Sex</label><br />
-                    <input name="sex" @if (ViewData["sex"] != null)
+                    <input placeholder="M or F" name="sex" @if (ViewData["sex"] != null)
                     {
                         @($"value={ViewData["sex"]}")
                     } />
@@ -65,7 +67,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Age at Death</label><br />
-                    <input name="ageatdeath" @if (ViewData["ageAtDeath"] != null)
+                    <input placeholder="e.g. C or A" name="ageatdeath" @if (ViewData["ageAtDeath"] != null)
                     {
                         @($"value={ViewData["ageAtDeath"]}")
                     } />
@@ -75,7 +77,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Head Direction</label><br />
-                    <input name="headDirection" @if (ViewData["headDirection"] != null)
+                    <input placeholder="e.g. W" name="headDirection" @if (ViewData["headDirection"] != null)
                     {
                         @($"value={ViewData["headDirection"]}")
                     } />
@@ -85,7 +87,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Burial ID</label><br />
-                    <input name="burialid" @if (ViewData["burialId"] != null)
+                    <input placeholder="e.g. 190N20ESE13" name="burialid" @if (ViewData["burialId"] != null)
                     {
                         @($"value={ViewData["burialId"]}")
                     } />
@@ -95,7 +97,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Hair Color</label><br />
-                    <input name="hairColor" @if (ViewData["hairColor"] != null)
+                    <input placeholder="e.g. E or D" name="hairColor" @if (ViewData["hairColor"] != null)
                     {
                         @($"value={ViewData["hairColor"]}")
                     } />
@@ -105,7 +107,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Face Bundle</label><br />
-                    <input name="faceBundle" @if (ViewData["faceBundle"] != null)
+                    <input placeholder="e.g. Y" name="faceBundle" @if (ViewData["faceBundle"] != null)
                     {
                         @($"value={ViewData["faceBundle"]}")
                     } />
@@ -117,16 +119,14 @@ select specific records for more details-->
             }
         </div>
 
+        <!--Burial Record List-->
         <div class="col-9">
-            @*@if (User.IsInRole("Admin, Researcher"))
+            @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
             {
             <a class="text-decoration-none text-white float-end" asp-controller="Researcher" asp-action="AddRecord">
-            <button type="button" class="btn btn-warning">Add a new record</button>
-            </a></br></br>
-            }*@
-            <a class="text-decoration-none text-white float-end" asp-controller="Researcher" asp-action="AddRecord">
                 <button type="button" class="btn btn-warning">Add a new record</button>
-            </a></br></br>
+            </a><br/><br/>
+            }
             @if (Model.Count < 0)
             {
                 <p>No results</p>
@@ -135,8 +135,9 @@ select specific records for more details-->
             {
                 <div class="card card-outline-primary m-1 p-1">
 
-                    <form method="delete">
-                        <input type="hidden" value="@b.id" />
+                    <!--Confirmation modal-->
+                    <form method="post" asp-controller="Researcher" asp-action="Delete">
+                        <input type="hidden" value="@b.id" name="burialid" />
 
                         <div class="modal fade" id="confirm-delete-modal" tabindex="-1" aria-labelledby="confirm-delete-modal-title" aria-hidden="true">
                             <div class="modal-dialog">
@@ -175,34 +176,28 @@ select specific records for more details-->
                     </ul>
 
                     <div>
-                        @*@if (User.IsInRole("Admin, Researcher"))
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
                         {
                             <span class="card-text">
                                 <button type="button" class="btn btn-danger btn-sm float-end m-1" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">Remove</button>
                             </span>
-                        }*@
-                        <span class="card-text">
-                            <button type="button" class="btn btn-danger btn-sm float-end m-1" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">Remove</button>
-                        </span>
+                        }
 
-@*                        @if (User.IsInRole("Admin, Researcher"))
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
                         {
                             <span class="card-text">
-                                <button type="submit" class="btn btn-info btn-sm float-end m-1">Edit</button>
+                                <button class="btn btn-info btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">Edit</a></button>
                             </span>
-                        }*@
+                        }
 
                         <span class="card-text">
-                            <button class="btn btn-info btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">Edit</a></button>
-                        </span>
-
-                        <span class="card-text">
-                            <button class="btn btn-warning btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Home" asp-action="BurialRecord" asp-route-burialId="@b.id">View Details</a></button>
+                            <a class="text-decoration-none" asp-controller="Home" asp-action="BurialRecord" asp-route-burialId="@b.id"><button class="btn btn-warning btn-sm float-end m-1 text-white">View Details</button></a>
                         </span>
                     </div>
                 </div>
             }
 
+            <!--Pagination options-->
             @{
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";

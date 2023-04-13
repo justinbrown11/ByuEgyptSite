@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByuEgyptSite.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext // Inherit from AspNetCore Identity for authentication
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
+        // Declare db sets for all models (tables)
         public DbSet<Burial> Burials { get; set; }
         public DbSet<Textile> Textiles { get; set; }
         public DbSet<BurialTextile> BurialTextiles { get; set;}
@@ -33,6 +34,7 @@ namespace ByuEgyptSite.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Set key relationships for association tables/models (many to many relationships)
             builder.Entity<BurialTextile>()
                 .HasKey(at => new { at.TextileId, at.BurialId });
             builder.Entity<StructureTextile>()
@@ -51,6 +53,8 @@ namespace ByuEgyptSite.Data
                 .HasKey(at => new { at.TextileId, at.AnalysisId });
             builder.Entity<PhotoDataTextile>()
                 .HasKey(at => new { at.TextileId, at.PhotoDataId });
+
+            // Set foreign key relationship for body analysis and burials
             builder.Entity<BodyAnalysis>()
                 .HasOne(d => d.Burial)
                 .WithMany(p => p.bodyAnalyses)

@@ -1,15 +1,25 @@
-﻿
-@{
-    ViewData["Title"] = "AddUser";
-}
-
+﻿<!--Used for both adding and editing users-->
 @model ByuEgyptSite.Models.UserViewModel
+
+@{
+    ViewData["Title"] = Model.Id == null ? "AddUser" : "Edit";
+}
 
 <div class="container p-3">
     <div class="d-flex justify-content-center">
+
+        <!--Form for adding/editing-->
         <form method="post">
-            @*<input type="hidden" asp-for="Id" value=1/>*@
-            <input type="hidden" asp-for="Id" value=@Model.Id />
+
+            <!--Input list-->
+            @if (Model.Id == null)
+            {
+                <input type="hidden" asp-for="Id" value="1" />
+            }
+            else
+            {
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+            }
 
             <label asp-for="UserName">UserName:</label>
             <input asp-for="UserName" /><br />
@@ -28,6 +38,7 @@
 
             <div class="d-flex justify-content-center"><button type="submit">Save Changes</button></div>
 
+            <!--Validation summary-->
             <div asp-validation-summary="All"></div>
         </form>
     </div>

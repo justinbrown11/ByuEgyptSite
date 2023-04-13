@@ -5,6 +5,7 @@
 
 @model List<ByuEgyptSite.Models.UserViewModel>
 
+<!--User Table-->
 <table class="table bg-light">
     <thead>
         <tr>
@@ -21,6 +22,7 @@
             <form method="post" asp-controller="Admin" asp-action="Delete" id="delete-form-@user.Id">
                 <input type="hidden" value="@user.Id" name="Id" />
 
+                <!--Delete confirmation modal-->
                 <div class="modal fade" id="confirm-delete-modal-@user.Id" tabindex="-1" aria-labelledby="confirm-delete-modal-title-@user.Id" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -55,7 +57,7 @@
 
                 <td>
                     <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal-@user.Id">Remove</button>
-                    <button class="btn btn-info btn-sm m-1"><a class="text-decoration-none text-white" asp-controller="Admin" asp-action="Edit" asp-route-Id="@user.Id">Edit</a></button>
+                    <a class="text-decoration-none" asp-controller="Admin" asp-action="Edit" asp-route-Id="@user.Id"><button class="btn btn-info btn-sm m-1 text-white">Edit</button></a>
                 </td>
             </tr>
         }
@@ -63,6 +65,7 @@
     </tbody>
 </table>
 
+<!--Button to add user-->
 <div class="d-flex justify-content-center">
-    <button class="btn btn-info btn-sm m-1"><a class="text-decoration-none text-white" asp-controller="Admin" asp-action="AddUser">Add User</a></button>
+    <a class="text-decoration-none" asp-controller="Admin" asp-action="AddUser"><button class="btn btn-warning btn-sm m-1">Add User</button></a>
 </div>
