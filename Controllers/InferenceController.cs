@@ -28,13 +28,9 @@ namespace ByuEgyptSite.Controllers
             {
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
             });
-            //Tensor<string> score = result.First().AsTensor<string>(); //changed these two from float to string
 
-            Tensor<string> score = result.First().AsTensor<string>();
-            var categories = new[] { "W", "E" };
-            int predictionIndex = Array.IndexOf(score.ToArray(), score.Max());
-
-            var prediction = new Prediction { PredictedValue = categories[predictionIndex] };
+            string score = result.First().AsTensor<string>().ToArray()[0];
+            var prediction = new Prediction { PredictedValue = score };
             return Ok(prediction);
         }
     }
