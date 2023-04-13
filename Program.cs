@@ -103,7 +103,7 @@ builder.Services.AddSwaggerGen();
 //line below is for Supervised Learning Model
 //added this below
 builder.Services.AddSingleton<InferenceSession>(
-  new InferenceSession("MLModel/myOnnxFile1.onnx")
+  new InferenceSession("myOnnxFile1.onnx")
 );
 
 // Build the app
