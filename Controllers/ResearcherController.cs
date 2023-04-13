@@ -163,17 +163,14 @@ namespace ByuEgyptSite.Controllers
             }
 
             var temp = userData;
-            var json = JsonConvert.SerializeObject(temp);
-            TempData["UserInput"] = json;
-            return RedirectToAction("Score", "Inference");
+            string json = JsonConvert.SerializeObject(temp);
+            return RedirectToAction("Score", "Inference", new { json = json });
         }
 
         [HttpGet]
-        public IActionResult SendPrediction()
+        public IActionResult SendPrediction(string json)
         {
-            string predictionJson = TempData["prediction"] as string;
-
-            ViewBag.Prediction = predictionJson;
+            ViewBag.Prediction = json;
 
             return View("/Views/Researcher/SupervisedAnalysis.cshtml");
         }
