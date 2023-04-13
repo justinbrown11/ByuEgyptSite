@@ -1,15 +1,20 @@
-﻿
-@{
-    ViewData["Title"] = "AddUser";
-}
+﻿@model ByuEgyptSite.Models.UserViewModel
 
-@model ByuEgyptSite.Models.UserViewModel
+@{
+    ViewData["Title"] = Model.Id == null ? "AddUser" : "Edit";
+}
 
 <div class="container p-3">
     <div class="d-flex justify-content-center">
         <form method="post">
-            @*<input type="hidden" asp-for="Id" value=1/>*@
-            <input type="hidden" asp-for="Id" value=@Model.Id />
+            @if (Model.Id == null)
+            {
+                <input type="hidden" asp-for="Id" value="1" />
+            }
+            else
+            {
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+            }
 
             <label asp-for="UserName">UserName:</label>
             <input asp-for="UserName" /><br />
