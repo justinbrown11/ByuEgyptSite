@@ -54,6 +54,16 @@ namespace ByuEgyptSite.Controllers
         }
 
         [HttpGet]
+        public IActionResult SendPrediction()
+        {
+            string predictionJson = TempData["prediction"] as string;
+
+            ViewBag.Prediction = predictionJson;
+
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml");
+        }
+
+        [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
             return View("/Views/Researcher/UnsupervisedAnalysis.cshtml");
