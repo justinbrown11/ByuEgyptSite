@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Association class model for textile photo data
+    /// </summary>
     [Table("photodata_textile")]
     public class PhotoDataTextile
     {

@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Assocation class model for textile dimensions
+    /// </summary>
     [Table("dimension_textile")]
     public class DimensionTextile
     {

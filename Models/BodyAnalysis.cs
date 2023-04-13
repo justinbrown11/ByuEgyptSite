@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for body analysis charts
+    /// </summary>
     [Table("bodyanalysischart")]
     public class BodyAnalysis
     {

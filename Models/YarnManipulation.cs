@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for textile yarn manipulations
+    /// </summary>
     [Table("yarnmanipulation")]
     public class YarnManipulation
     {
@@ -18,6 +21,6 @@ namespace ByuEgyptSite.Models
         public string? ply { get; set; }
         public int? yarnmanipulationid { get; set; }
         public string? direction { get; set; }
-        public ICollection<YarnManipulationTextile> yarnManipulationTextiles { get; set; }
+        public ICollection<YarnManipulationTextile> yarnManipulationTextiles { get; set; } // assocation class to textiles
     }
 }
