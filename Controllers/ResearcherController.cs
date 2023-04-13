@@ -11,12 +11,12 @@ using System.Diagnostics;
 namespace ByuEgyptSite.Controllers
 {
     //[Authorize(Roles = "Administrator, Researcher")]
-
-    // Constructor
     public class ResearcherController : Controller
     {
         private readonly ILogger<ResearcherController> _logger;
-        private ApplicationDbContext _burialContext { get; set; }
+        private ApplicationDbContext _burialContext { get; set; } // Add db context
+
+        // Constructor
         public ResearcherController(ILogger<ResearcherController> logger, ApplicationDbContext ac)
         {
             _logger = logger;
@@ -29,6 +29,8 @@ namespace ByuEgyptSite.Controllers
         {
             return View(new UserData());
         }
+
+        // Post form destination for supervised analysis view
         [HttpPost]
         public IActionResult SupervisedAnalysis(UserData data)
         {
@@ -36,68 +38,77 @@ namespace ByuEgyptSite.Controllers
         }
 
         // Return Unsupervised Analysis view
+        [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
             return View("/Views/Analysis/UnsupervisedAnalysis.cshtml");
         }
-
-        // Adding and editing records
         
+        // The Add New Record View
         [HttpGet]
-        // Return the AddRecord view
         public IActionResult AddRecord()
         {
+            // For conditionals in view
             ViewData["Type"] = "add";
 
             return View("/Views/Admin/Records/AddEditRecord.cshtml");
         }
 
+        // Either adds/edits a record
         [HttpPost]
-
-        // Given a valid record entry, add the entry to the database _burialContext
-        // and return a view
         public IActionResult AddEditRecord(Burial b)
         {
             if (ModelState.IsValid) // If entry is valid, add the object and return confirmation view
             {
+                // Generate random 64 bit id
                 byte[] bytes = Guid.NewGuid().ToByteArray();
                 long randomId = BitConverter.ToInt64(bytes, 0);
 
+                // Simply to hold for later use
                 var id = b.id;
 
+                // If id is passed, keep it, if not, use the randomly generated one
                 b.id = b.id != 0 ? b.id : randomId;
+
+                // If burialmainid was passed, use it, if not, generate it
                 b.burialmainid = b.burialmainid != null ? b.burialmainid : $"{b.squarenorthsouth}{b.northsouth}{b.squareeastwest}{b.eastwest}{b.area}{b.burialnumber}";
 
+                // Adding a new record
                 if (id == 0)
                 {
                     _burialContext.Burials.Add(b);
                 }
+
+                // Editing an existing record
                 else
                 {
                     _burialContext.Update(b);
                 }
-                _burialContext.SaveChanges();
 
+                _burialContext.SaveChanges(); // save changes
+
+                // Redirect to burial record list
                 return RedirectToAction("BurialSummary", "Home");
             }
-            else // If entry is invalid, return AddRecord view with record to be added
+            else // If entry is invalid, return View with issues
             {
                 return View("/Views/Admin/Records/AddEditRecord.cshtml", b);
             }
         }
 
-        // Function to edit
+        // The Edit a record view (form)
         [HttpGet]
         public IActionResult Edit(long burialId)
         {
             var burial = _burialContext.Burials.Single(x => x.id == burialId);
 
+            // For conditionals in view
             ViewData["Type"] = "edit";
 
             return View("/Views/Admin/Records/AddEditRecord.cshtml", burial); // return the AddRecord view along with the record for the single entry
         }
 
-        // Function to delete table row (Post)
+        // Deletes a record
         [HttpPost]
         public IActionResult Delete(long burialid)
         {
@@ -105,7 +116,8 @@ namespace ByuEgyptSite.Controllers
             _burialContext.Burials.Remove(record);
             _burialContext.SaveChanges();
 
-            return RedirectToAction("BurialSummary", "Home"); // delete record and return confirmation view
+            // Redirect back to burial record list view
+            return RedirectToAction("BurialSummary", "Home");
         }
     }
 }

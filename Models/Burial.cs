@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for burial records
+    /// </summary>
     [Table("burialmain")]
     public class Burial
     {
@@ -45,7 +48,7 @@ namespace ByuEgyptSite.Models
         public string? clusternumber { get; set; }
         public string? shaftnumber { get; set; }
         public string? burialmainid { get; set; }
-        public ICollection<BurialTextile>? burialTextiles { get; set; }
-        public ICollection<BodyAnalysis>? bodyAnalyses { get; set; }
+        public ICollection<BurialTextile>? burialTextiles { get; set; } // association class with textiles
+        public ICollection<BodyAnalysis>? bodyAnalyses { get; set; } // body analyses
     }
 }

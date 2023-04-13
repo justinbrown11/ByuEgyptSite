@@ -1,4 +1,4 @@
-﻿<!--Paginated list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
+﻿<!--Paginated/filtered list of all burials with a brief summary of the info. User has ability to filter results by certain criteria and 
 select specific records for more details-->
 
 @model PaginatedList<Burial>
@@ -9,6 +9,8 @@ select specific records for more details-->
 
 <div class="container-fluid">
     <div class="row m-1 p-1">
+
+        <!--Filter form-->
         <div class="col-3">
             <h3>Filters</h3>
             @using (Html.BeginForm("BurialSummary", "Home", FormMethod.Get))
@@ -117,6 +119,7 @@ select specific records for more details-->
             }
         </div>
 
+        <!--Burial Record List-->
         <div class="col-9">
             @*@if (User.IsInRole("Admin, Researcher"))
             {
@@ -135,6 +138,7 @@ select specific records for more details-->
             {
                 <div class="card card-outline-primary m-1 p-1">
 
+                    <!--Confirmation modal-->
                     <form method="post" asp-controller="Researcher" asp-action="Delete">
                         <input type="hidden" value="@b.id" name="burialid" />
 
@@ -203,6 +207,7 @@ select specific records for more details-->
                 </div>
             }
 
+            <!--Pagination options-->
             @{
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
