@@ -31,7 +31,10 @@ namespace ByuEgyptSite.Controllers
 
             string score = result.First().AsTensor<string>().ToArray()[0];
             var prediction = new Prediction { PredictedValue = score };
-            return Ok(prediction);
+            //Added to send prediction to view
+            TempData["prediction"] = JsonConvert.SerializeObject(prediction);
+
+            return RedirectToAction("SendPrediction", "Researcher");
         }
     }
 }
