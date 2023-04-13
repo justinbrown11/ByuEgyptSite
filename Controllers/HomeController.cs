@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq.Expressions;
 using LinqKit;
+using ByuEgyptSite.MLModel;
 
 namespace ByuEgyptSite.Controllers
 {
