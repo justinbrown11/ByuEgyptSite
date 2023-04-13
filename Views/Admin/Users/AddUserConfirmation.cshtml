@@ -3,5 +3,10 @@
     ViewData["Title"] = "AddUserConfirmation";
 }
 
-<h1>AddUserConfirmation</h1>
+@model ByuEgyptSite.Models.UserViewModel
+
+<h2 class="text-center">@Model.UserName has been added. Thank you</h2>
+<br />
+
+<a asp-action="Index" asp-controller="Admin" class="btn btn-primary">Return to Users</a>
 
