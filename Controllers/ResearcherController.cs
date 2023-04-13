@@ -13,7 +13,7 @@ using System.Text.Json;
 
 namespace ByuEgyptSite.Controllers
 {
-    //[Authorize(Roles = "Administrator, Researcher")]
+    [Authorize(Roles = "Administrator, Researcher")]
     public class ResearcherController : Controller
     {
         private readonly ILogger<ResearcherController> _logger;
@@ -54,7 +54,7 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
-            return View("/Views/Analysis/UnsupervisedAnalysis.cshtml");
+            return View("/Views/Researcher/UnsupervisedAnalysis.cshtml");
         }
         
         // The Add New Record View
