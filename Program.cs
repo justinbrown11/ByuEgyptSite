@@ -30,8 +30,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
 })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddRoleManager<RoleManager<IdentityRole>>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.Configure<PasswordHasherOptions>(options =>
+{
+    options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3;
+});
+
+builder.Services.AddScoped<UserManager<IdentityUser>>();
+builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
@@ -71,6 +78,7 @@ builder.Services.AddHsts(options =>
 });
 builder.Services.AddControllersWithViews();
 
+
 var app = builder.Build();
 
 // THIS IS NOT YET WORKING PROPERLY (won't login)
@@ -97,14 +105,25 @@ using (var scope = app.Services.CreateScope())
 
         // Check if admin user exists, and create if it doesn't
         var user = await userManager.FindByNameAsync("admin");
+
+        bool temp = user == null;
+
         if (user == null)
         {
             user = new IdentityUser
             {
                 UserName = "admin",
                 Email = "admin@example.com",
-                EmailConfirmed = true
+                EmailConfirmed = true,
             };
+
+            var tempPassword = Environment.GetEnvironmentVariable("TEMP_PASS");
+
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+
+            var hashedPassword = passwordHasher.HashPassword(user, tempPassword);
+
+            user.PasswordHash = hashedPassword;
 
             var result = await userManager.CreateAsync(user);
 
