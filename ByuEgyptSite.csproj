@@ -28,4 +28,12 @@
     <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include=".ebextensions\000_install_certbot.config" />
+    <None Include=".ebextensions\01_open_https_port.config" />
+    <None Include=".ebextensions\02_grant_executable_rights.config" />
+    <None Include=".ebextensions\03_renew_ssl_certificate_cron_job.config" />
+    <None Include=".platform\hooks\postdeploy\00_get_certificate.sh" />
+  </ItemGroup>
+
 </Project>
