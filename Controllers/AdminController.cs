@@ -9,7 +9,7 @@ using System.Threading.Channels;
 
 namespace ByuEgyptSite.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         // Initialize user and role managers
