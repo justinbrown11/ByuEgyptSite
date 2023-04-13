@@ -121,7 +121,7 @@ select specific records for more details-->
 
         <!--Burial Record List-->
         <div class="col-9">
-            @if (User.IsInRole("Admin, Researcher"))
+            @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
             {
             <a class="text-decoration-none text-white float-end" asp-controller="Researcher" asp-action="AddRecord">
                 <button type="button" class="btn btn-warning">Add a new record</button>
@@ -176,14 +176,14 @@ select specific records for more details-->
                     </ul>
 
                     <div>
-                        @if (User.IsInRole("Admin, Researcher"))
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
                         {
                             <span class="card-text">
                                 <button type="button" class="btn btn-danger btn-sm float-end m-1" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">Remove</button>
                             </span>
                         }
 
-                        @if (User.IsInRole("Admin, Researcher"))
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Researcher"))
                         {
                             <span class="card-text">
                                 <button class="btn btn-info btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">Edit</a></button>
