@@ -130,11 +130,7 @@ namespace ByuEgyptSite.Controllers
 
             if (!string.IsNullOrEmpty(burialid))
             {
-                int burialIdInt;
-                if (int.TryParse(burialid, out burialIdInt))
-                {
-                    predicate = predicate.And(b => b.burialid == burialIdInt);
-                }
+                predicate = predicate.And(b => Regex.IsMatch(b.burialmainid, burialid));
             }
 
             if (!string.IsNullOrEmpty(textileFunction))

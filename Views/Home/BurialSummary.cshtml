@@ -17,14 +17,14 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Textile Color</label><br/>
-                    <input name="textColor" @if (ViewData["textColor"] != null) { @($"value={ViewData["textColor"]}") } />
+                    <input placeholder="e.g. Yellow" name="textColor" @if (ViewData["textColor"] != null) { @($"value={ViewData["textColor"]}") } />
                 </div>
 
                 <br />
 
                 <div class="form-group text-center">
                     <label>Textile Structure</label><br />
-                    <input name="structure" @if (ViewData["structure"] != null)
+                    <input placeholder="e.g. Plain Weave" name="structure" @if (ViewData["structure"] != null)
                     {
                         @($"value={ViewData["structure"]}")
                     } />
@@ -34,7 +34,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Sex</label><br />
-                    <input name="sex" @if (ViewData["sex"] != null)
+                    <input placeholder="M or F" name="sex" @if (ViewData["sex"] != null)
                     {
                         @($"value={ViewData["sex"]}")
                     } />
@@ -65,7 +65,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Age at Death</label><br />
-                    <input name="ageatdeath" @if (ViewData["ageAtDeath"] != null)
+                    <input placeholder="e.g. C or A" name="ageatdeath" @if (ViewData["ageAtDeath"] != null)
                     {
                         @($"value={ViewData["ageAtDeath"]}")
                     } />
@@ -75,7 +75,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Head Direction</label><br />
-                    <input name="headDirection" @if (ViewData["headDirection"] != null)
+                    <input placeholder="e.g. W" name="headDirection" @if (ViewData["headDirection"] != null)
                     {
                         @($"value={ViewData["headDirection"]}")
                     } />
@@ -85,7 +85,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Burial ID</label><br />
-                    <input name="burialid" @if (ViewData["burialId"] != null)
+                    <input placeholder="e.g. 190N20ESE13" name="burialid" @if (ViewData["burialId"] != null)
                     {
                         @($"value={ViewData["burialId"]}")
                     } />
@@ -95,7 +95,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Hair Color</label><br />
-                    <input name="hairColor" @if (ViewData["hairColor"] != null)
+                    <input placeholder="e.g. E or D" name="hairColor" @if (ViewData["hairColor"] != null)
                     {
                         @($"value={ViewData["hairColor"]}")
                     } />
@@ -105,7 +105,7 @@ select specific records for more details-->
 
                 <div class="form-group text-center">
                     <label>Face Bundle</label><br />
-                    <input name="faceBundle" @if (ViewData["faceBundle"] != null)
+                    <input placeholder="e.g. Y" name="faceBundle" @if (ViewData["faceBundle"] != null)
                     {
                         @($"value={ViewData["faceBundle"]}")
                     } />
@@ -135,8 +135,8 @@ select specific records for more details-->
             {
                 <div class="card card-outline-primary m-1 p-1">
 
-                    <form method="delete">
-                        <input type="hidden" value="@b.id" />
+                    <form method="post" asp-controller="Researcher" asp-action="Delete">
+                        <input type="hidden" value="@b.id" name="burialid" />
 
                         <div class="modal fade" id="confirm-delete-modal" tabindex="-1" aria-labelledby="confirm-delete-modal-title" aria-hidden="true">
                             <div class="modal-dialog">
@@ -188,7 +188,7 @@ select specific records for more details-->
 @*                        @if (User.IsInRole("Admin, Researcher"))
                         {
                             <span class="card-text">
-                                <button type="submit" class="btn btn-info btn-sm float-end m-1">Edit</button>
+                                <button class="btn btn-info btn-sm float-end m-1"><a class="text-decoration-none text-white" asp-controller="Researcher" asp-action="Edit" asp-route-burialId="@b.id">Edit</a></button>
                             </span>
                         }*@
 
