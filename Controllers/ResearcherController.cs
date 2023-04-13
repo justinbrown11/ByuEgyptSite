@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace ByuEgyptSite.Controllers
 {
-    //[Authorize(Roles = "Administrator, Researcher")]
+    [Authorize(Roles = "Administrator, Researcher")]
     public class ResearcherController : Controller
     {
         private readonly ILogger<ResearcherController> _logger;
