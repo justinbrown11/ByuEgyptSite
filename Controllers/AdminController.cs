@@ -10,6 +10,8 @@ using System.Threading.Channels;
 namespace ByuEgyptSite.Controllers
 {
     //[Authorize(Roles = "Administrator")]
+
+    // Constructor
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -19,6 +21,7 @@ namespace ByuEgyptSite.Controllers
         {
             _userManager = userManager;
             _roleManager = roleManager;
+
         }
 
         // Display list of all users
@@ -64,6 +67,8 @@ namespace ByuEgyptSite.Controllers
             {
                 var newUser = new IdentityUser { UserName = user.UserName, Email = user.Email };
                 var rolesToAdd = user.Roles?.Where(role => !string.IsNullOrWhiteSpace(role)).ToArray() ?? new string[0];
+
+
                 var result = await _userManager.CreateAsync(newUser);
 
                 if (result.Succeeded)

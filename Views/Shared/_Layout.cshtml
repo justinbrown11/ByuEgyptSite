@@ -28,6 +28,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="BurialSummary">Burials</a>
                         </li>
+                        @*@if (User.IsInRole("Admin") || User.IsInRole("Researcher"))
+                        {
+                        <li><a class="nav-link text-dark" asp-area="" asp-controller="???????????" asp-action="SupervisedAnalysis">SupervisedAnalysis</a></li>
+                        }*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Researcher" asp-action="SupervisedAnalysis">SupervisedAnalysis</a>
                         </li>
@@ -63,7 +67,7 @@
                 <li class="nav-item"><a class="nav-link px-2 text-body-secondary text-warning" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-2 text-body-secondary text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
             </ul>
-            <p class="text-center text-body-secondary">&copy; @(DateTime.Now.Year) Fed el-Gamous</p>
+            <p class="text-center text-body-secondary">&copy; @(DateTime.Now.Year) Fag el-Gamous</p>
         </footer>
     </div>
     
