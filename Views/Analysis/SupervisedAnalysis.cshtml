@@ -1,8 +1,73 @@
 ﻿<!--Page that allows users to enter osteology and/or burial info to predict (based on trained model) the sex of the burial-->
-
 @{
     ViewData["Title"] = "SupervisedAnalysis";
 }
-
 <h1>SupervisedAnalysis</h1>
-
+@{
+}
+@model UserData
+<h2>Enter data</h2>
+<form method="post" aps-controller="Researcher" asp-action="SupervisedAnalysis">
+    <div class="form-group">
+        <label asp-for="depth">depth:</label><input asp-for="depth" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="length">length:</label>
+        <input asp-for="length" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="area_NE">area_NE:</label>
+        <input asp-for="area_NE" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="area_NW">area_NW:</label>
+        <input asp-for="area_NW" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="area_SE">area_SE:</label>
+        <input asp-for="area_SE" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="area_SW">area_SW:</label>
+        <input asp-for="area_SW" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="wrapping_B">wrapping_B:</label>
+        <input asp-for="wrapping_B" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="wrapping_H">wrapping_H:</label>
+        <input asp-for="wrapping_H" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="wrapping_W">wrapping_W:</label>
+        <input asp-for="wrapping_W" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="samplescollected_false">samplescollected_false:</label>
+        <input asp-for="samplescollected_false" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="samplescollected_true">samplescollected_true:</label>
+        <input asp-for="samplescollected_true" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ageatdeath_A">ageatdeath_A:</label>
+        <input asp-for="ageatdeath_A" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ageatdeath_C">ageatdeath_C:</label>
+        <input asp-for="ageatdeath_C" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ageatdeath_I">ageatdeath_I:</label>
+        <input asp-for="ageatdeath_I" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ageatdeath_N">ageatdeath_N:</label>
+        <input asp-for="ageatdeath_N" class="form-control" />
+    </div>
+    <div class="float-end">
+        <input class="btn btn-primary" type="submit" value="Enter" />
+    </div>
+</form>
