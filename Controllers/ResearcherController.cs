@@ -54,7 +54,7 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
-            return View("/Views/Analysis/UnsupervisedAnalysis.cshtml");
+            return View("/Views/Researcher/UnsupervisedAnalysis.cshtml");
         }
         
         // The Add New Record View
