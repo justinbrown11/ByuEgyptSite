@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Assocation class Model for textile colors
+    /// </summary>
     [Table("color_textile")]
     public class ColorTextile
     {

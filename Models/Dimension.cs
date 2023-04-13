@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for textile dimensions
+    /// </summary>
     [Table("dimension")]
     public class Dimension
     {
@@ -12,6 +15,6 @@ namespace ByuEgyptSite.Models
         public string? dimensiontype { get; set; }
         public string? value { get; set; }
         public int? dimensionid { get; set; }
-        public ICollection<DimensionTextile> dimensionTextiles { get; set; }
+        public ICollection<DimensionTextile> dimensionTextiles { get; set; } // association class to textiles
     }
 }

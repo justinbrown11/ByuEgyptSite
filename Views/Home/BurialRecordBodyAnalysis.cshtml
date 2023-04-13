@@ -1,11 +1,11 @@
-﻿<!--Details for individual burial records in the BurialSummary.cshtml (i.e. field notes, photographs, measurements, and any
-details captured about the mummy or items included in its burial.)-->
+﻿<!--Overview of burial record body analyses-->
 @{
     ViewData["Title"] = "Burial Record Body Analysis";
 }
 
 @model Burial
 
+<!--Internal nav-->
 <ul class="nav justify-content-center">
     <li class="nav-item">
         <a class="nav-link" asp-controller="Home" asp-action="BurialRecord" asp-route-burialid=@Model.id><button class="btn btn-outline-warning">Overview</button></a>
@@ -20,6 +20,7 @@ details captured about the mummy or items included in its burial.)-->
 
 </br>
 
+<!--Body Analyses Table-->
 <div class="row">
     <div class="col">
         <h3 class="text-center">Body Analysis</h3>

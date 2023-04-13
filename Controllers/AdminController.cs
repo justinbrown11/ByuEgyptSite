@@ -10,21 +10,21 @@ using System.Threading.Channels;
 namespace ByuEgyptSite.Controllers
 {
     //[Authorize(Roles = "Administrator")]
-
-    // Constructor
     public class AdminController : Controller
     {
+        // Initialize user and role managers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+        // Constructer
         public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-
         }
 
         // Display list of all users
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             // Retrieve list of all users and create a list of type "UserViewModel"
@@ -52,25 +52,28 @@ namespace ByuEgyptSite.Controllers
             return View("/Views/Admin/Users/Index.cshtml", userViewModels);
         }
 
-        // Add a new user (Get)
+        // Add a new user view form
         [HttpGet]
         public IActionResult AddUser()
         {
             return View("/Views/Admin/Users/AddUser.cshtml", new UserViewModel());
         }
 
-        // Add a new user (Post)
+        // Adds a new user
         [HttpPost]
         public async Task<IActionResult> AddUser(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
+                // Create new user object
                 var newUser = new IdentityUser { UserName = user.UserName, Email = user.Email };
+                // Grab roles to add
                 var rolesToAdd = user.Roles?.Where(role => !string.IsNullOrWhiteSpace(role)).ToArray() ?? new string[0];
 
-
+                // Create the user
                 var result = await _userManager.CreateAsync(newUser);
 
+                // If success
                 if (result.Succeeded)
                 {
                     // Add roles to the new user
@@ -101,7 +104,7 @@ namespace ByuEgyptSite.Controllers
             return View("/Views/Admin/Users/AddUser.cshtml", user);
         }
 
-        // Edit user info and roles (Get)
+        // Edit user info and roles view form
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
@@ -130,7 +133,7 @@ namespace ByuEgyptSite.Controllers
             return View("/Views/Admin/Users/AddUser.cshtml", model);
         }
 
-        // Edit user info and roles (Post)
+        // Edits user info and roles
         [HttpPost]
         public async Task<IActionResult> Edit(UserViewModel model)
         {
