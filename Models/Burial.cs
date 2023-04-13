@@ -3,15 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByuEgyptSite.Models
 {
+    /// <summary>
+    /// Model for burial records
+    /// </summary>
     [Table("burialmain")]
     public class Burial
     {
         [Key]
         [Required]
         public long id { get; set; }
-
         public string? squarenorthsouth { get; set; }
-
         public string? headdirection { get; set; }
 
         public string? sex { get; set; }
@@ -23,7 +24,6 @@ namespace ByuEgyptSite.Models
         public string? southtohead { get; set; }
         public string? preservation { get; set; }
         public string? fieldbookpage { get; set; }
-
         public string? squareeastwest { get; set; }
         public string? goods { get; set; }
         public string? text { get; set; }
@@ -48,7 +48,7 @@ namespace ByuEgyptSite.Models
         public string? clusternumber { get; set; }
         public string? shaftnumber { get; set; }
         public string? burialmainid { get; set; }
-        public ICollection<BurialTextile> burialTextiles { get; set; }
-        public ICollection<BodyAnalysis> bodyAnalyses { get; set; }
+        public ICollection<BurialTextile>? burialTextiles { get; set; } // association class with textiles
+        public ICollection<BodyAnalysis>? bodyAnalyses { get; set; } // body analyses
     }
 }
