@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ByuEgyptSite.MLModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using Newtonsoft.Json;
 
 namespace ByuEgyptSite.Controllers
 {
     [ApiController]
     [Route("/score")] //type in /score to make requests to the endpoint
-    public class InferenceController : ControllerBase
+    public class InferenceController : Controller
     {
         private InferenceSession _session;
 
@@ -15,9 +17,13 @@ namespace ByuEgyptSite.Controllers
             _session = session;
         }
 
-        [HttpPost]
-        public ActionResult Score(HousingData data)
+        [HttpGet]
+        public ActionResult Score()
         {
+            var json = TempData["UserInput"] as string;
+            var data = JsonConvert.DeserializeObject<UserData>(json);
+            //var data = TempData["UserInput"] as UserData;
+
             var result = _session.Run(new List<NamedOnnxValue> //this is where we actually score our model
             {
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())

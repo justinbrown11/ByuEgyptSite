@@ -1,12 +1,15 @@
-﻿using ByuEgyptSite.Controllers;
+using ByuEgyptSite.Controllers;
 using ByuEgyptSite.Data;
 using ByuEgyptSite.MLModel;
 using ByuEgyptSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Diagnostics;
+using System.Text.Json;
+
 
 namespace ByuEgyptSite.Controllers
 {
@@ -27,17 +30,27 @@ namespace ByuEgyptSite.Controllers
         [HttpGet]
         public IActionResult SupervisedAnalysis()
         {
-            return View(new UserData());
+            return View("/Views/Researcher/SupervisedAnalysis.cshtml", new UserData());
         }
 
         // Post form destination for supervised analysis view
         [HttpPost]
         public IActionResult SupervisedAnalysis(UserData data)
         {
-            return View();
+            return RedirectToAction("AlterData","Researcher", data);
         }
 
-        // Return Unsupervised Analysis view
+        [HttpPost]
+        public IActionResult AlterData(UserData data)
+        {
+            var temp = data;
+            var json = JsonConvert.SerializeObject(temp);
+            TempData["UserInput"] = json;
+            //var json = JsonSerializer.Serialize(temp, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+            return RedirectToAction("Score","Inference");
+        }
+
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
