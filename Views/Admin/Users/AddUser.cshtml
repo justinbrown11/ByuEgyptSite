@@ -11,6 +11,11 @@
         <!--Form for adding/editing-->
         <form method="post">
 
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="text-danger" asp-validation-summary="All"></div>
+            }
+
             <!--Input list-->
             @if (Model.Id == null)
             {
@@ -22,24 +27,23 @@
             }
 
             <label asp-for="UserName">Username</label><br/>
-            <input asp-for="UserName" /><br />
+            <input asp-for="UserName" /><br /><br/>
 
             <label asp-for="Email">Email</label><br/>
-            <input asp-for="Email" /><br />
+            <input asp-for="Email" /><br /><br/>
 
+            <label>Role</label><br />
             <div>
-                <input type="checkbox" name="Roles" value="Administrator" @(Model.Roles != null && Model.Roles.Contains("Administrator") ? "checked='checked'" : "")>
+                <input type="radio" name="Roles" value="Administrator" @(Model.Roles != null && Model.Roles.Contains("Administrator") ? "checked='checked'" : "")>
                 <label>Administrator</label>
             </div>
             <div>
-                <input type="checkbox" name="Roles" value="Researcher" @(Model.Roles != null && Model.Roles.Contains("Researcher") ? "checked='checked'" : "")>
+                <input type="radio" name="Roles" value="Researcher" @(Model.Roles != null && Model.Roles.Contains("Researcher") ? "checked='checked'" : "")>
                 <label>Researcher</label>
-            </div>
+            </div><br/>
 
-            <div class="d-flex justify-content-center"><button type="submit">Save Changes</button></div>
+            <div class="d-flex justify-content-center"><button class="btn btn-warning"type="submit">Save Changes</button></div>
 
-            <!--Validation summary-->
-            <div asp-validation-summary="All"></div>
         </form>
     </div>
 </div>
