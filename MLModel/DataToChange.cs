@@ -2,6 +2,7 @@
 {
     public class DataToChange
     {
+        //Models for data from user form
         public float depth { get; set; }
         public float length { get; set; }
         public string? area { get; set; }
