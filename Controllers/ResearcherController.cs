@@ -40,7 +40,9 @@ namespace ByuEgyptSite.Controllers
         {
             return RedirectToAction("AlterData","Researcher", data);
         }
-        //this dummifies the user inputs so they can be made into a format the onnx file will accept
+
+        //Receive data from the user and change it to a usable json format
+        //to prepare to send to our trained model
         [HttpPost]
         public IActionResult AlterData(DataToChange data)
         {
@@ -162,11 +164,13 @@ namespace ByuEgyptSite.Controllers
                 userData.ageatdeath_N = 0;
             }
 
+            //Convert object to json format and send to Inference controller to score model
             var temp = userData;
             string json = JsonConvert.SerializeObject(temp);
             return RedirectToAction("Score", "Inference", new { json = json });
         }
-        //send the data off for the onnx prediction model
+
+        //Receive prediction and return to user
         [HttpGet]
         public IActionResult SendPrediction(string json)
         {
@@ -175,7 +179,7 @@ namespace ByuEgyptSite.Controllers
             return View("/Views/Researcher/SupervisedAnalysis.cshtml");
         }
 
-        //access our "discoveries" page
+        //Return UnsupervisedAnalysis Page
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {
