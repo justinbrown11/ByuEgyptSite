@@ -208,7 +208,7 @@ app.UseHsts();
 app.Use(async (context, next) =>
 {
     // Set content security policy header
-    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'");
+    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' *.byu.edu; ");
 
     // Call next middleware in pipeline
     await next();
