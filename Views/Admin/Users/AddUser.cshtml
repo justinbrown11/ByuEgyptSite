@@ -1,4 +1,4 @@
-﻿<!--Used for both adding and editing users-->
+<!--Used for both adding and editing users-->
 @model ByuEgyptSite.Models.UserViewModel
 
 @{
@@ -18,15 +18,14 @@ else
 }
 
 <div class="container p-3">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center text-center">
 
         <!--Form for adding/editing-->
         <form method="post">
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <!--Validation summary-->
-                <div asp-validation-summary="All"></div>
+                <div class="text-danger" asp-validation-summary="All"></div>
             }
 
             <!--The confirmation modal-->
@@ -58,23 +57,19 @@ else
                 <input type="hidden" asp-for="Id" value="@Model.Id" />
             }
 
-            <div class="form-group">
-                <label asp-for="UserName">UserName:</label>
-                <input asp-for="UserName" />
-            </div><br />
+            <label asp-for="UserName">Username</label><br/>
+            <input asp-for="UserName" /><br /><br/>
 
-            <div class="form-group">
-                <label asp-for="Email">Email:</label>
-                <input asp-for="Email" />
-            </div><br />
+            <label asp-for="Email">Email</label><br/>
+            <input asp-for="Email" /><br /><br/>
 
-
-            <div class="form-group">
-                <input type="checkbox" name="Roles" value="Administrator" @(Model.Roles != null && Model.Roles.Contains("Administrator") ? "checked='checked'" : "")>
+            <label>Role</label><br />
+            <div>
+                <input type="radio" name="Roles" value="Administrator" @(Model.Roles != null && Model.Roles.Contains("Administrator") ? "checked='checked'" : "")>
                 <label>Administrator</label>
             </div>
-            <div class="form-group">
-                <input type="checkbox" name="Roles" value="Researcher" @(Model.Roles != null && Model.Roles.Contains("Researcher") ? "checked='checked'" : "")>
+            <div>
+                <input type="radio" name="Roles" value="Researcher" @(Model.Roles != null && Model.Roles.Contains("Researcher") ? "checked='checked'" : "")>
                 <label>Researcher</label>
             </div><br/>
 
