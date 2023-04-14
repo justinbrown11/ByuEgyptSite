@@ -9,27 +9,48 @@
 
 <form method="post" asp-controller="Researcher" asp-action="AlterData">
     <div class="form-group">
-        <label asp-for="depth">depth:</label><input asp-for="depth" class="form-control" />
+        <label asp-for="depth">Depth:</label><input asp-for="depth" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="length">length:</label>
+        <label asp-for="length">Length:</label>
         <input asp-for="length" class="form-control" />
     </div>
+
     <div class="form-group">
-        <label asp-for="area">area</label>
-        <input asp-for="area" class="form-control" />
+        <label asp-for="area">Area:</label>
+        <select asp-for="area" class="form-control">
+            <option value="NE">NE</option>
+            <option value="NW">NW</option>
+            <option value="SE">SE</option>
+            <option value="SW">SW</option>
+        </select>
     </div>
+
     <div class="form-group">
-        <label asp-for="wrapping">wrapping:</label>
-        <input asp-for="wrapping" class="form-control" />
+        <label asp-for="wrapping">Wrapping:</label>
+        <select asp-for="wrapping" class="form-control">
+            <option value="B">Bones Only (B)</option>
+            <option value="H">Partial Wrapping (H)</option>
+            <option value="W">Full Wrapping (W)</option>
+        </select>
     </div>
+
     <div class="form-group">
-        <label asp-for="samplescollected">samplescollected:</label>
-        <input asp-for="samplescollected" class="form-control" />
+        <label asp-for="samplescollected">Samples Collected:</label>
+        <select asp-for="samplescollected" class="form-control">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
     </div>
+
     <div class="form-group">
-        <label asp-for="ageatdeath">ageatdeath:</label>
-        <input asp-for="ageatdeath" class="form-control" />
+        <label asp-for="ageatdeath">Age at Death:</label>
+        <select asp-for="ageatdeath" class="form-control">
+            <option value="A">Adult</option>
+            <option value="C">Child</option>
+            <option value="I">Infant</option>
+            <option value="N">Newborn</option>
+        </select>
     </div>
 
     <div class="float-end">
