@@ -56,3 +56,8 @@ body {
 .navtitle {
     font-family: Papyrus, Arial, Helvetica, sans-serif;
 }
+
+.sticky {
+    position: sticky;
+    top: 70px;
+}

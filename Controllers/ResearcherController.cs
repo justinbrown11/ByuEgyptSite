@@ -172,6 +172,7 @@ namespace ByuEgyptSite.Controllers
 
         //Receive prediction and return to user
         [HttpGet]
+        [Authorize(Roles = "Administrator, Researcher")]
         public IActionResult SendPrediction(string json)
         {
             ViewBag.Prediction = json;
