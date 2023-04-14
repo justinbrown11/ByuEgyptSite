@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ByuEgyptSite;
 using Microsoft.ML.OnnxRuntime;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +85,13 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     // requires using Microsoft.AspNetCore.Http;
     options.MinimumSameSitePolicy = SameSiteMode.None;
     options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
+// Forward headers for proxy server
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 });
 
 // Enforces HSTS
@@ -182,10 +190,12 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseForwardedHeaders();
 }
 else
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseForwardedHeaders();
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }

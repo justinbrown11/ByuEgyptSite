@@ -1,8 +1,20 @@
-﻿<!--Used for both adding and editing users-->
+<!--Used for both adding and editing users-->
 @model ByuEgyptSite.Models.UserViewModel
 
 @{
     ViewData["Title"] = Model.Id == null ? "AddUser" : "Edit";
+}
+
+<!--Render the header conditionally-->
+@if (Model.Id == null)
+{
+    <h2 class="text-center">Add a new user</h2><br/>
+}
+
+else
+{
+    <h2 class="text-center">Edit User</h2>
+    <br />
 }
 
 <div class="container p-3">
@@ -15,6 +27,25 @@
             {
                 <div class="text-danger" asp-validation-summary="All"></div>
             }
+
+            <!--The confirmation modal-->
+            <div class="modal fade" id="confirm-add-modal" tabindex="-1" aria-labelledby="confirm-add-modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirm-add-modal-title">Confirm Record</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to make this change?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <input class="btn btn-warning" type="submit" value="Save" />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--Input list-->
             @if (Model.Id == null)
@@ -42,7 +73,8 @@
                 <label>Researcher</label>
             </div><br/>
 
-            <div class="d-flex justify-content-center"><button class="btn btn-warning"type="submit">Save Changes</button></div>
+            <!--Launches modal-->
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirm-add-modal" type="button">Save Changes</button>
 
         </form>
     </div>
