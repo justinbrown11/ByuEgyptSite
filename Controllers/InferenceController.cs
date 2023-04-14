@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace ByuEgyptSite.Controllers
 {
     [ApiController]
-    [Route("/score")] //type in /score to make requests to the endpoint
+    [Route("/score")]
     public class InferenceController : Controller
     {
         private InferenceSession _session;
@@ -17,6 +17,7 @@ namespace ByuEgyptSite.Controllers
             _session = session;
         }
 
+        //Call the .onnx file with our trained model and retreive prediction based on user data
         [HttpGet]
         public ActionResult Score(string json)
         {
