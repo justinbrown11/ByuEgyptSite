@@ -40,7 +40,7 @@ namespace ByuEgyptSite.Controllers
         {
             return RedirectToAction("AlterData","Researcher", data);
         }
-
+        //this dummifies the user inputs so they can be made into a format the onnx file will accept
         [HttpPost]
         public IActionResult AlterData(DataToChange data)
         {
@@ -166,7 +166,7 @@ namespace ByuEgyptSite.Controllers
             string json = JsonConvert.SerializeObject(temp);
             return RedirectToAction("Score", "Inference", new { json = json });
         }
-
+        //send the data off for the onnx prediction model
         [HttpGet]
         public IActionResult SendPrediction(string json)
         {
@@ -175,6 +175,7 @@ namespace ByuEgyptSite.Controllers
             return View("/Views/Researcher/SupervisedAnalysis.cshtml");
         }
 
+        //access our "discoveries" page
         [HttpGet]
         public IActionResult UnsupervisedAnalysis()
         {

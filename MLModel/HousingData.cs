@@ -1,6 +1,6 @@
 ﻿using Microsoft.ML.OnnxRuntime.Tensors;
-
-public class HousingData //we need to make one of these for each
+//This holds all of the data that is fed into our supervised prediction model
+public class HousingData 
 {
     public float depth { get; set; }
     public float length { get; set; }
@@ -18,7 +18,8 @@ public class HousingData //we need to make one of these for each
     public float ageatdeath_I { get; set; }
     public float ageatdeath_N { get; set; }
 
-    public Tensor<float> AsTensor() //prepare the object we'll use with the Onnx file
+    //prepare the object we'll use with the Onnx file
+    public Tensor<float> AsTensor() 
     {
         float[] data = new float[]
         {
