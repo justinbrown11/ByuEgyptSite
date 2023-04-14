@@ -54,35 +54,37 @@
                         </tr>
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile photos table-->
             <h3 class="text-center">Photos</h3>
             <br />
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                <th>Description</th>
-                <th>Filename</th>
-                <th>Photo Data Id</th>
-                <th>Date</th>
-                <th>Url</th>
-                </thead>
-                <tbody>
-                    @foreach (BurialTextile t in Model.burialTextiles)
-                    {
-                        foreach (PhotoDataTextile p in t.Textile.photoDataTextiles)
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <th>Photo</th>
+                    <th>Description</th>
+                    <th>Filename</th>
+                    <th>Photo Data Id</th>
+                    <th>Date</th>
+                    </thead>
+                    <tbody>
+                        @foreach (BurialTextile t in Model.burialTextiles)
                         {
-                            <tr>
-                                <td>@p.PhotoData.description</td>
-                                <td>@p.PhotoData.filename</td>
-                                <td>@p.PhotoData.photodataid</td>
-                                <td>@p.PhotoData.date</td>
-                                <td>@p.PhotoData.url</td>
-                            </tr>
+                            foreach (PhotoDataTextile p in t.Textile.photoDataTextiles)
+                            {
+                                <tr>
+                                    <td><img width="350" height="350" src="@p.PhotoData.url" alt="@p.PhotoData.description" /></td>
+                                    <td>@p.PhotoData.description</td>
+                                    <td>@p.PhotoData.filename</td>
+                                    <td>@p.PhotoData.photodataid</td>
+                                    <td>@p.PhotoData.date</td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table><br />
+                    </tbody>
+                </table>
+            </div><br /><br /><br />
         </div>
 
         <div class="col">
@@ -111,7 +113,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile decorations table-->
             <h3 class="text-center">Decoration</h3>
@@ -133,7 +135,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile dimensions table-->
             <h3 class="text-center">Dimension</h3>
@@ -157,7 +159,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile structures table-->
             <h3 class="text-center">Structure</h3>
@@ -179,7 +181,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile colors table-->
             <h3 class="text-center">Color</h3>
@@ -201,7 +203,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile functions table-->
             <h3 class="text-center">Textile Function</h3>
@@ -223,7 +225,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
 
             <!--Textile yarn manipulations table-->
             <h3 class="text-center">Yarn Manipulation</h3>
@@ -259,7 +261,7 @@
                         }
                     }
                 </tbody>
-            </table><br />
+            </table><br /><br /><br />
         </div>
     </div>
 </div>

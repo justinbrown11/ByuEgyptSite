@@ -29,7 +29,7 @@ namespace ByuEgyptSite.MLModel
             samplescollected_false, samplescollected_true, ageatdeath_A,
             ageatdeath_C, ageatdeath_I, ageatdeath_N
             };
-            int[] dimensions = new int[] { 1, 15 }; //***adjust this number to match the number of inputs we have (8 was here)
+            int[] dimensions = new int[] { 1, 15 }; //adjusted this number to match the number of inputs we have
             return new DenseTensor<float>(data, dimensions);
         }
     }
