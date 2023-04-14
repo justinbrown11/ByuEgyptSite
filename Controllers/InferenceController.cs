@@ -5,6 +5,9 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using Newtonsoft.Json;
 
 namespace ByuEgyptSite.Controllers
+    //this is the controller to make the API call to the ONNX file work
+    //the route to access just the api is /score. This works on localhost.
+    //we also integrated swagger with this app for testing purposes. It can be accessed with /swagger
 {
     [ApiController]
     [Route("/score")] //type in /score to make requests to the endpoint
@@ -17,6 +20,8 @@ namespace ByuEgyptSite.Controllers
             _session = session;
         }
 
+        //beneath is the process to access the onnx file and get the predicted value.
+        //We then send the predicted value off to the researcher controller
         [HttpGet]
         public ActionResult Score(string json)
         {
