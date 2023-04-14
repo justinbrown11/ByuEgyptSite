@@ -10,7 +10,7 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show text-dark border-bottom box-shadow mb-3" role="alert">
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show text-dark border-bottom box-shadow mb-3 sticky" role="alert">
         We use cookies to enhance your experience. By using our website, you consent to our use of cookies. <a asp-controller="Home" asp-action="Privacy">Learn More</a>.
         <button type="button" class="accept-policy close btn btn-outline-warning" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             <span aria-hidden="true">Accept</span>

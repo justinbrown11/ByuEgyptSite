@@ -18,6 +18,16 @@ select specific records for more details-->
                 <input name="pageNumber" type="hidden" value=1/>
 
                 <div class="form-group text-center">
+                    <label class="lead">Burial Location (ID)</label><br />
+                    <input placeholder="e.g. 190N20ESE13" name="burialid" @if (ViewData["burialId"] != null)
+                    {
+                        @($"value={ViewData["burialId"]}")
+                    } />
+                </div>
+
+                <br/>
+
+                <div class="form-group text-center">
                     <label class="lead">Textile Color</label><br />
                     <input placeholder="e.g. Yellow" name="textColor" @if (ViewData["textColor"] != null) { @($"value={ViewData["textColor"]}") } />
                 </div>
@@ -80,16 +90,6 @@ select specific records for more details-->
                     <input placeholder="e.g. W" name="headDirection" @if (ViewData["headDirection"] != null)
                     {
                         @($"value={ViewData["headDirection"]}")
-                    } />
-                </div>
-
-                <br />
-
-                <div class="form-group text-center">
-                    <label class="lead">Burial ID</label><br />
-                    <input placeholder="e.g. 190N20ESE13" name="burialid" @if (ViewData["burialId"] != null)
-                    {
-                        @($"value={ViewData["burialId"]}")
                     } />
                 </div>
 
@@ -159,7 +159,7 @@ select specific records for more details-->
                     </form>
 
                     <div class="bg-light p-1">
-                        <h4>Burial Location: @(b.squarenorthsouth + " " + b.northsouth + " " + b.squareeastwest + " " + b.eastwest + " " + b.area + " " + b.burialnumber)</h4>
+                        <h4>Burial Location (Id): @(b.squarenorthsouth + " " + b.northsouth + " " + b.squareeastwest + " " + b.eastwest + " " + b.area + " " + b.burialnumber)</h4>
                         <span class="badge sex-color">
                             @(b.sex == "M" ? "Male" : b.sex == "F" ? "Female" : "Unknown Sex")
                         </span>
